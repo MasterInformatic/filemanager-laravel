@@ -17,4 +17,8 @@ return [
     	'browser' => '1',
     ],
 
+    'test' => 'test',
+
+    'test2' => 'test2',
+
 ];

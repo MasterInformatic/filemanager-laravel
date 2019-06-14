@@ -12,9 +12,9 @@ Route::group(['namespace' => 'MasterInformatic\filemanagerlaravel\Http\Controlle
 	Route::get('filemanager/ckeditor/upload','FileManagerController@upload_ckeditor')->name('fmckpost');
 
 
-	
-	
-});
+
+
+}); 
 
 // Route::post('filemanager/ckeditor/upload');
 // Route::get('filemanager/ckeditor/browser');
