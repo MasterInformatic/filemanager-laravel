@@ -1,0 +1,16 @@
+{
+    "name": "MasterInformatic/filemanager-laravel",
+    "description": "A file manager for laravel",
+    "authors": [{
+        "name": "MasterInformatic"
+    }],
+    "require": {
+        "php": ">=7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "MasterInformatic\\filemanager-laravel\\": "src/"
+        }
+    }
+}
+
