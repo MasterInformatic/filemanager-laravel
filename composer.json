@@ -1,6 +1,6 @@
 {
     "name": "masterinformatic/filemanager-laravel",
-    "description": "A file manager for laravel",
+    "description": "A file manager for laravel and ckeditor integration",
     "authors": [{
         "name": "MasterInformatic"
     }],
@@ -9,8 +9,9 @@
     },
     "autoload": {
         "psr-4": {
-            "MasterInformatic\\filemanager-laravel\\": "src/"
+            "MasterInformatic\\filemanagerlaravel\\": "src/"
         }
     }
+    
 }
 
