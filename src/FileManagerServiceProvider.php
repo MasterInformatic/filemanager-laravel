@@ -46,7 +46,7 @@ class FileManagerServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__.'/Assets' => public_path('mi/filemanager'),
+            __DIR__.'/Assets' => public_path('filemanager'),
         ], 'public');
 
 

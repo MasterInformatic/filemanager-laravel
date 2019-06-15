@@ -5,71 +5,22 @@
               <div class="t-subbody">
                 <ul class="entry-meta clearfix t-ul">
                     
-                  {!! $menu !!}
+                  
+                  <li class='no-a' ondrop='drop(event)' ondragover='allowDrop(event)' data-path="/"><div>
+                        <span class='os'>
+                            <i class='fa fa-arrow-right'></i>
+                            <a href='?directory=/storage/'>Storage</a>
+                        </span>
+                    </div><ul class='t-ul collapse'>
+                      {!! $menu !!}
+                    </ul></li>
 
                 </ul>
               </div>
 
-
+ 
 </section>
 </aside>
-
-
-
-{{-- 
-<section >
-<div class="t-subbody">
-                <ul class="entry-meta clearfix t-ul mi-main-fm">
-
-
-                  <li class="no-a"> 
-                    <div>
-                        <span class="os">
-                            <i class="fa fa-arrow-right"></i>
-                            <a href="">menu-3.2</a>
-                        </span>
-                        <span class="mara">
-                            <i class="fa fa-chevron-up"></i>
-                        </span>
-                    </div>
-                    <ul class="t-ul collapse">
-
-
-                      <li class="no-a">
-                        <div>
-                            <span class="os">
-                                <i class="fa fa-arrow-right"></i>
-                                <a href="">menu-3.2</a>
-                            </span>
-                            <span class="mara">
-                                <i class="fa fa-chevron-up"></i>
-                            </span>
-                        </div>
-                        <ul class="t-ul collapse">
-
-                          <li class="no-a">
-                            <div>
-                                <span class="os">
-                                    <i class="fa fa-arrow-right"></i>
-                                    <a href="">menu-3.2</a>
-                                </span>
-                                <span class="mara">
-                                    <i class="fa fa-chevron-up"></i>
-                                </span>
-                            </div>
-                            <ul class="t-ul collapse">
-                                
-                              <li> menu-3.2.1.1 </li>
-                              
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-</section> --}}
 
 
 
@@ -80,7 +31,7 @@
     e.stopPropagation();
   })
   $("li.no-a").click(function(e){
-      $(this).toggleClass('rev');
+      // $(this).toggleClass('rev');
       $(this).children("ul").collapse('toggle');
       e.stopPropagation();
   } );

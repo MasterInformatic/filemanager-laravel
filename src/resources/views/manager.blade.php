@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>MasterInformatic File Manager</title>
-    <link rel="stylesheet" href="{{ asset('css/FileManager.css') }}">
-    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <script src="http://danml.com/js/download.js"></script>
+
+
+    
+        <link rel="stylesheet" href="{{ asset('css/FileManager.css') }}">
+        <link rel="stylesheet" href="{{ asset('FileManager/css/cropper.min.css') }}">
+
+        <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{{ asset('FileManager/js/cropper.js') }}"></script>
+        <script src="{{ asset('FileManager/js/download.js') }}"></script>
+
 </head>
 <body>
     
@@ -21,26 +24,13 @@
 @include('manager::components.menu')
 
 <div class="container" id="asideContent" >
+
+    @yield('manager::FileManager')
     
-        @yield('manager::FileManager')
-      
+       
 </div>
 
-<script>
-  $("li.no-a div span.os a").click(function(e){
-    e.preventDefault();
-    getData(e.target.getAttribute("href"));
-  });
-
-  function getData(path){
-    $.get("/filemanager/getfiles"+path, function(data, status){
-      $("#shwfiles").text("");
-      $("#shwfiles").append(data);
-    });
-  }
-
-</script>
-
+@include('manager::components.modals.rename')
 
 <script>
 
@@ -122,6 +112,9 @@
   }
 
 
+  var contextItem = "item";
+  var allItems = document.querySelectorAll(".item");
+
   var contextMenuClassName = "context-menu";
   var contextMenuItemClassName = "context-menu__item";
   var contextMenuLinkClassName = "context-menu__link";
@@ -150,6 +143,11 @@
   var windowWidth;
   var windowHeight;
 
+  var modalRename = document.getElementById("modalRename");
+
+  function loadItems(){
+    allItems = document.querySelectorAll(".item");
+  }
 
   function init() {
     contextListener();
@@ -162,6 +160,8 @@
   function contextListener() {
     document.addEventListener( "contextmenu", function(e) {
       taskItemInContext = clickInsideElement( e, taskItemClassName );
+
+      console.log(taskItemInContext);
 
       if ( taskItemInContext ) {
 
@@ -179,7 +179,7 @@
   function clickListener() {
     document.addEventListener( "click", function(e) {
       var clickeElIsLink = clickInsideElement( e, contextMenuLinkClassName );
-
+      
 
       if ( clickeElIsLink ) {
         e.preventDefault();
@@ -191,6 +191,13 @@
         }
       }
     });
+  }
+
+  function removeClass(els,className){
+    console.log(els.length);
+    for(var i=0;i < els.length; i++){
+        els[i].classList.remove(className);
+    }
   }
 
   /*ESC*/
@@ -256,8 +263,6 @@
     var url = taskItemInContext.getAttribute("data-url");
     var name = taskItemInContext.getAttribute("data-id");
 
-    console.log(name);
-
     if(link.getAttribute("data-action")=="View"){
       window.open(url, '_blank');
     }
@@ -270,9 +275,28 @@
         x.send();
     }
 
+    if(link.getAttribute("data-action")=="Rename"){
+      // modalRename.classList.add("show");
+    }
+
     toggleMenuOff();
 
   }
+
+  // $("li.no-a div span.os a").click(function(e){
+  //   e.preventDefault();
+  //   getData(e.target.getAttribute("href"));
+
+    
+  // });
+
+  // function getData(path){
+  //   $.get("/filemanager/getfiles"+path, function(data, status){
+  //     $("#shwfiles").text("");
+  //     $("#shwfiles").append(data);
+  //   });
+  //   loadItems();
+  // }
 
   init();
 
