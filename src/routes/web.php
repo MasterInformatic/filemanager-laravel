@@ -12,8 +12,16 @@ Route::group(['namespace' => 'MasterInformatic\filemanagerlaravel\Http\Controlle
 	Route::get('filemanager/ckeditor/upload','FileManagerController@upload_ckeditor')->name('fmckpost');
 
 
+	Route::get('filemanager/rename','FileManagerController@rename_file')->name('fmrnfile');
 
 
+	Route::get('filemanager/getfiles','FileManagerController@getfiles')->name('fmgetfiles');
+
+	Route::post('filemanager/copyfiles','FileManagerController@copyfiles')->name('fmcpfiles');
+
+	Route::post('filemanager/download','FileManagerController@download')->name('fmdwnfiles');
+	// Route::get('filemanager/copyfiles','FileManagerController@copyfiles')->name('fmcpfiles');
+	
 }); 
 
 // Route::post('filemanager/ckeditor/upload');

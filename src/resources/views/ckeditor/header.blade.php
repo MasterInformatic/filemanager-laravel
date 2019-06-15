@@ -1,8 +1,7 @@
-<header>
+{{-- <header>
     <nav>
         <ul id="ul_folder">
             <li>
-                {{-- <button data-url="" >Añadir</button> --}}
                 <form action="{{ url('upload') }}" method="POST" enctype="multipart/form-data">
                     <input type="file" name="upload" onchange="submit()" id="addBtn" style="display:none;">
                     <label for="addBtn" class="btn">
@@ -35,4 +34,14 @@
             </li>
         </ul>
     </nav>
-</header>
+</header> --}}
+
+<div>
+    <div>
+        <button><i></i><span>Element</span></button>
+        <button><i></i><span>Element</span></button>
+        <button><i></i><span>Element</span></button>
+        <button><i></i><span>Element</span></button>
+        <button><i></i><span>Element</span></button>
+    </div>
+</div>

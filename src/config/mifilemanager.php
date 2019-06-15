@@ -3,22 +3,7 @@
 return [
 
 
-    'ckfinder' => true,
+    'dir' => public_path()."/",
 
-    'ckfinder_routes' => [
-
-        'upload' => '/upload',
-        'browser'    => '/browser',
-
-    ],
-
-    'routes' => [
-    	'upload' => '0',
-    	'browser' => '1',
-    ],
-
-    'test' => 'test',
-
-    'test2' => 'test2',
 
 ];

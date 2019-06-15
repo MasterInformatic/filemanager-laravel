@@ -2,17 +2,20 @@
 
 @section('manager::FileManager')
 
+<div id="shwfiles">
+	
 
 	@foreach($images as $i)
 
-	    <div class="item" data-url="{{ $i->url }}" >
+
+	    <div class="item" data-url="{{ url($i->path) }}" data-name="{{ $i->name }}" data-id="{{ $i->name }}" draggable="true" ondragstart="drag(event)" id="{{ $i->name }}">
 	        <div class="img">
-	            <img src="{{ $i->url }}" alt="" width="250px" height="250px">
+	            <img src="{{ url($i->path) }}" alt="" width="250px" height="250px" draggable="false">
 	        </div>
 	        <div class="data">
 	            <span>{{ $i->name }}</span>
 	            <br>
-	            <span>{{ $i->created_at }}</span>
+	            <span>{{ $i->size }}</span>
 	        </div>
 	        <div class="select">
 	            <div class="con">
@@ -25,5 +28,5 @@
 
 	@endforeach
 
-
+</div>
 @endsection

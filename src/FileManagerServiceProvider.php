@@ -10,10 +10,11 @@ class FileManagerServiceProvider extends ServiceProvider
      * Register services.
      *
      * @return void
-     */
+     */ 
     public function register()
     {
         //
+         // require_once __DIR__ . '/Helpers/HumanizeFolders.php';
     }
 
     /**
@@ -24,8 +25,10 @@ class FileManagerServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'manager');
+
         $this->mergeConfigFrom(
             __DIR__.'/config/mifilemanager.php', 'mifilemanager'
         );
@@ -38,6 +41,13 @@ class FileManagerServiceProvider extends ServiceProvider
             __DIR__.'/resources/views' => resource_path('views/mi/filemanager'),
         ]);
 
+        $this->publishes([
+            __DIR__.'/resources/views' => resource_path('views/mi/filemanager'),
+        ]);
+
+        $this->publishes([
+            __DIR__.'/Assets' => public_path('mi/filemanager'),
+        ], 'public');
 
 
     } 
