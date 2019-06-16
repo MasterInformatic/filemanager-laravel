@@ -8,12 +8,14 @@
     
         <link rel="stylesheet" href="{{ asset('css/FileManager.css') }}">
         <link rel="stylesheet" href="{{ asset('FileManager/css/cropper.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('FileManager/css/dropzone.css') }}">
 
         <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="{{ asset('FileManager/js/cropper.js') }}"></script>
         <script src="{{ asset('FileManager/js/download.js') }}"></script>
-
+        <script src="{{ asset('FileManager/js/dropzone.js') }}"></script>
+ 
 </head>
 <body>
     
@@ -23,14 +25,97 @@
 
 @include('manager::components.menu')
 
-<div class="container" id="asideContent" >
+@include('manager::components.modals.mkdir')
 
+<div class="container" id="asideContent"  >
+        
     @yield('manager::FileManager')
-    
-       
+
 </div>
 
-@include('manager::components.modals.rename')
+<script>
+
+
+
+    var btnMkDir = $("#btnMkDir");
+    var modalRename = $("#modalRename");
+    var btnCloseModal = $("#btnCloseModal");
+    var btnCancel = $("#btnCancel");
+    var btnSave = $("#btnSave");
+    var mkdirname = $("#mkdirname");
+
+    btnMkDir.click(function(){
+        modalRename.addClass("show");
+    });
+    btnCloseModal.click(function(){
+        modalRename.removeClass("show");
+    });
+    btnCancel.click(function(){
+        modalRename.removeClass("show");
+    });
+
+    $("div.mi-toggle a").click(function(e){
+        e.preventDefault();
+        getData(e.target.getAttribute("href"));
+        btnMkDir.attr("data-path",e.target.getAttribute("href"));
+    });
+
+    function getData(path){
+        $.get("/filemanager/getfiles"+path, function(data, status){
+          $("#shwfiles").text("");
+          $("#shwfiles").append(data);
+        });
+    }
+
+    btnSave.click(function(){
+        sendMkDir();
+    });
+
+    function sendMkDir(){
+        var p = btnMkDir.attr("data-path");
+        var v = mkdirname.val();
+        var c = p+v;
+
+
+        $.post( "/filemanager/mkdir", { d_path: p,d_name: v })
+            .done(function( data ) {
+                if(data.status=="success"){
+                    alert(data.message);
+                    modalRename.removeClass("show");
+                }else{
+                    alert(data.message);
+                }
+        });
+    }
+
+
+
+</script>
+
+
+    <script>
+    var toggler = document.getElementsByClassName("caretDown");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+      toggler[i].addEventListener("click", function() {
+
+            console.log(this);
+
+        this.parentElement
+            .parentElement
+            .querySelector(".nested")
+            .classList
+            .toggle("active");
+
+        this.querySelector(".fa")
+            .classList
+            .toggle("fa-arrow-down");
+      });
+    }
+    </script>
+
+
 
 <script>
 
@@ -56,7 +141,6 @@
         $.post( "/filemanager/copyfiles", { file_path: file_url,file_name: file_name, to_url: url })
             .done(function( data ) {
 
-            console.log(data);
         });
 
     }
@@ -161,7 +245,7 @@
     document.addEventListener( "contextmenu", function(e) {
       taskItemInContext = clickInsideElement( e, taskItemClassName );
 
-      console.log(taskItemInContext);
+      // console.log(taskItemInContext);
 
       if ( taskItemInContext ) {
 
@@ -234,9 +318,12 @@
 
 
   function positionMenu(e) {
+
+
     clickCoords = getPosition(e);
     clickCoordsX = clickCoords.x;
     clickCoordsY = clickCoords.y;
+    
 
     menuWidth = menu.offsetWidth + 4;
     menuHeight = menu.offsetHeight + 4;
@@ -244,14 +331,18 @@
     windowWidth = window.innerWidth;
     windowHeight = window.innerHeight;
 
+    console.log((windowHeight - clickCoordsY) );
+    
     if ( (windowWidth - clickCoordsX) < menuWidth ) {
       menu.style.left = windowWidth - menuWidth + "px";
     } else {
       menu.style.left = clickCoordsX + "px";
     }
 
+
     if ( (windowHeight - clickCoordsY) < menuHeight ) {
-      menu.style.top = windowHeight - menuHeight + "px";
+      // menu.style.top = windowHeight - menuHeight + "px";
+      menu.style.top = clickCoordsY + "px";
     } else {
       menu.style.top = clickCoordsY + "px";
     }
@@ -283,20 +374,7 @@
 
   }
 
-  // $("li.no-a div span.os a").click(function(e){
-  //   e.preventDefault();
-  //   getData(e.target.getAttribute("href"));
-
-    
-  // });
-
-  // function getData(path){
-  //   $.get("/filemanager/getfiles"+path, function(data, status){
-  //     $("#shwfiles").text("");
-  //     $("#shwfiles").append(data);
-  //   });
-  //   loadItems();
-  // }
+  
 
   init();
 

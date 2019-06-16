@@ -20,6 +20,10 @@ Route::group(['namespace' => 'MasterInformatic\filemanagerlaravel\Http\Controlle
 	Route::post('filemanager/copyfiles','FileManagerController@copyfiles')->name('fmcpfiles');
 
 	Route::post('filemanager/download','FileManagerController@download')->name('fmdwnfiles');
+	
+	Route::post('filemanager/mkdir','FileManagerController@fmkdir');
+
+
 	// Route::get('filemanager/copyfiles','FileManagerController@copyfiles')->name('fmcpfiles');
 	
 }); 
