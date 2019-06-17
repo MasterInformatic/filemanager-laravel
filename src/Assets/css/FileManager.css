@@ -1,0 +1,659 @@
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css);@import url(https://use.fontawesome.com/releases/v5.2.0/css/all.css);* {
+  box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin-top: 100px;
+}
+
+.container #shwfiles {
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.container .item.selected {
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.container .item.selected .select {
+  display: block;
+  width: 250px;
+  height: 250px;
+  border: 4px solid rgba(26, 35, 126, 0.7);
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  position: absolute;
+}
+
+.container .item.selected .select div.con {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.container .item.selected .select div.con div.triangle {
+  width: 0;
+  height: 0;
+  border-top: 150px solid transparent;
+  border-bottom: 0px solid transparent;
+  border-right: 150px solid rgba(26, 35, 126, 0.7);
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.container .item.selected .select div.con img {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: -10px;
+  right: -5px;
+}
+
+.container .item {
+  margin: 10px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  position: relative;
+}
+
+.container .item .select {
+  display: none;
+}
+
+.container .item .img {
+  width: 250px;
+  height: 250px;
+}
+
+.container .item .img img {
+  width: 100%;
+  height: 100%;
+}
+
+.container .item .data {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 25%;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  text-align: justify;
+}
+
+.container .item .data span {
+  font-size: 14px;
+  margin: 5px;
+}
+
+.primary-header {
+  padding: 24px 0;
+  text-align: center;
+  border-bottom: solid 2px #cfcfcf;
+}
+
+.primary-header__title {
+  color: #393939;
+  font-size: 36px;
+}
+
+.primary-header__title small {
+  font-size: 18px;
+  color: #898989;
+}
+
+.content {
+  padding: 48px 0;
+  border-bottom: solid 2px #cfcfcf;
+}
+
+.content__footer {
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* footer */
+
+.primary-footer {
+  padding: 24px 0;
+  color: #898989;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* tasks */
+
+.tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: solid 1px #dfdfdf;
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+/* context menu */
+
+.context-menu {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  padding: 12px 0;
+  width: 240px;
+  background-color: #fff;
+  border: solid 1px #dfdfdf;
+  box-shadow: 1px 1px 2px #cfcfcf;
+}
+
+.context-menu--active {
+  display: block;
+}
+
+.context-menu__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.context-menu__item {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.context-menu__item:last-child {
+  margin-bottom: 0;
+}
+
+.context-menu__link {
+  display: block;
+  padding: 4px 12px;
+  color: #0066aa;
+  text-decoration: none;
+}
+
+.context-menu__link:hover {
+  color: #fff;
+  background-color: #0066aa;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  background: #0066aa;
+}
+
+header nav {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header nav ul {
+  width: 100%;
+  height: 100%;
+  /*background: red;*/
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+header nav ul.ul_h {
+  display: none;
+}
+
+header nav ul li {
+  list-style: none;
+}
+
+header nav ul li button {
+  height: 30px;
+  border-radius: 5px;
+  background: #0066aa;
+  color: white;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  padding: 5px 10px;
+  margin: 0px 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+header nav ul li button:hover {
+  background: rgba(69, 101, 120, 0.6);
+}
+
+.btn {
+  height: 30px;
+  border-radius: 5px;
+  background: #0066aa;
+  color: white;
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  padding: 5px 10px;
+  margin: 0px 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:hover {
+  background: rgba(69, 101, 120, 0.6);
+}
+
+.modalRename {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  top: 0px;
+  left: 0px;
+}
+
+.modalRename.show {
+  display: block;
+}
+
+.modalRename div {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+}
+
+.modalRename div .close {
+  width: 50px;
+  height: 30px;
+  position: absolute;
+  z-index: 1001;
+  top: 15px;
+  right: 10px;
+}
+
+.modalRename div .form {
+  margin-top: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  width: 500px;
+  height: 200px;
+  background: white;
+  box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+}
+
+.modalRename div .form .header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  background: #f7f8f9;
+}
+
+.modalRename div .form .body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  height: 100px;
+  padding: 10px;
+  background: rgba(247, 248, 249, 0.5);
+}
+
+.modalRename div .form .body form input {
+  padding: 10px;
+  /*border: none;*/
+  border: 0.5px solid rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+.modalRename div .form .footer {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  padding: 10px;
+  background: #f7f8f9;
+}
+
+.modalRename div .form .footer button {
+  margin: 0px 5px;
+}
+
+section {
+  width: 100%;
+}
+
+/*.t-subbody{
+		width: 100%;
+		background: #325499;
+		color:white;
+
+		ul.t-ul.entry-meta{
+				width: 100%;
+				list-style: none;
+				cursor: pointer;
+				list-style: none;
+
+				li.no-a{
+
+
+						ul.t-ul{
+
+
+								li.no-a{
+
+
+								}
+						}
+				}
+		}
+
+		ul.t-ul{
+				width: 100%;
+				list-style: none;
+				cursor: pointer;
+				padding: 0px;
+
+				li:not(.no-a):hover{
+						background: red;
+				}
+
+				li.no-a{
+						width: 100%;
+						padding: 15px;
+						position: relative;
+
+
+
+
+						div{
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+
+								span.os{
+										i{
+
+										}
+										a{
+												color:white;
+												text-decoration: none;
+										}
+								}
+								span.mara{
+										i{
+
+										}
+								}
+						}
+				}
+		}
+}*/
+
+div.main {
+  width: 100%;
+  height: 50px;
+  background: #f2f2f2;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  padding: 0px 5px;
+}
+
+div.main div.elements {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+div.main div.elements button {
+  margin: 0px 7px;
+  border: none;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 35px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  outline: none;
+  padding: 0px 5px;
+}
+
+div.main div.elements button.btnMain {
+  display: none;
+  width: 35px;
+  height: 35px;
+}
+
+div.main div.elements button:hover {
+  background: rgba(242, 242, 242, 0.7);
+}
+
+div.main div.elements button:active {
+  background: #f6f6f6;
+}
+
+div.main div.elements button span {
+  margin: 0px 5px;
+}
+
+div.main div.elements button span.h {
+  display: none;
+}
+
+aside.shFiles {
+  width: 250px;
+  height: 100vh;
+  background: #f2f2f2;
+  position: fixed;
+  transition: 0.5s;
+  top: 50px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  left: 0px;
+  z-index: 100;
+  overflow-y: scroll;
+}
+
+/* width */
+
+aside.shFiles::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* CAMINO*/
+
+aside.shFiles::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* BARRA */
+
+aside.shFiles::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* hover */
+
+aside.shFiles::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#asideContent {
+  position: absolute;
+  left: 250px;
+  top: -50px;
+  transition: 0.5s;
+}
+
+#asideContent.s {
+  left: 250px;
+}
+
+@media (max-width: 800px) {
+  div.main div.elements button {
+    width: 35px;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  div.main div.elements button span {
+    display: none;
+  }
+
+  div.main div.elements button.btnMain {
+    display: block;
+    width: 35px;
+    height: 35px;
+  }
+
+  div.main div.elements button:hover {
+    background: white;
+  }
+
+  aside.shFiles {
+    width: 250px;
+    height: 100vh;
+    background: #f2f2f2;
+    position: fixed;
+    transition: 0.5s;
+    top: 50px;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    left: -250px;
+    z-index: 100;
+    overflow-y: scroll;
+  }
+
+  aside.shFiles.s {
+    left: 0px;
+  }
+
+  #asideContent {
+    position: absolute;
+    left: 0px;
+    top: -50px;
+    transition: 0.5s;
+  }
+
+  #asideContent.s {
+    left: 250px;
+  }
+}
+
+div.osmm {
+  overflow: hidden;
+  margin-right: 10px;
+  background: #f2f2f2;
+}
+
+div.osmm ul#myUL {
+  display: block;
+  color: white;
+  width: 100%;
+  padding: 0px;
+  list-style: none;
+}
+
+div.osmm ul {
+  display: none;
+  width: 100%;
+  cursor: pointer;
+  list-style: none;
+  padding: 0px;
+}
+
+div.osmm ul.active {
+  padding: 0px;
+  display: block;
+  transition: 10s;
+}
+
+div.osmm ul li {
+  width: 100%;
+  background: #f2f2f2;
+  color: #333;
+  padding: 10px;
+}
+
+div.osmm ul li span {
+  padding: 10px;
+}
+
+div.osmm ul li span i {
+  color: #545499;
+}
+
+div.osmm ul li ul {
+  position: relative;
+  left: 10px;
+  padding: 5px;
+}
+
+div.osmm ul li .mi-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div.osmm ul li .mi-toggle span {
+  padding: 10px 10px;
+}
+
+div.osmm ul li .mi-toggle span.text {
+  text-align: left;
+  width: 100%;
+  margin-left: -7px;
+}
+
+div.osmm ul li .mi-toggle span.caretDown {
+  width: 10%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #545499;
+}
+

@@ -11,34 +11,30 @@
 - easy intefration for ckeditor
 - create news folders
 
-
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-
-
-
 ## Installation
-
 
 
 ### Setup
 
 
-> run the command
+> run the commands
 
 ```shell
 composer require masterinformatic/filemanager-laravel
 ```
 
-> now run and select MasterInformatic/filemanager
-
 ```shell
 php artisan vendor:publish 
+```
+- now select MasterInformatic/filemanager
+
+```shell
+php artisan storage:link
 ```
 
 - finally edit config/mifilemanager.php
 
 ---
-
 
 
 ## Support
