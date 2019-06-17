@@ -18,17 +18,21 @@ class Folder{
 
 	static function createDir($dir,$path){
 		try {
-			if(static::isValidName($dir)){//validName
-		        if(!static::isExits(public_path($path)."/".$dir)){//
-		    		if(File::isDirectory(public_path($path))){
-			        	$s = File::makeDirectory(public_path($path)."/".$dir, 0777, true, true);
+			if(config('mifilemanager.accessControl.FOLDER_CREATE')){
+				if(static::isValidName($dir)){//validName
+			        if(!static::isExits(public_path($path)."/".$dir)){//
+			    		if(File::isDirectory(public_path($path))){
+				        	$s = File::makeDirectory(public_path($path)."/".$dir, 0777, true, true);
+				    	}
+			    	}else{
+			    		throw new Exception("Folder already exists", 1);
+			    	
 			    	}
-		    	}else{
-		    		throw new Exception("Folder already exists", 1);
-		    	
-		    	}
+				}else{
+					throw new Exception("Invalid Name Folder", 1);
+				}
 			}else{
-				throw new Exception("Invalid Name Folder", 1);
+				throw new Exception("Permise denied", 1);
 			}
 
 			if($s){
@@ -37,13 +41,12 @@ class Folder{
 		    			"status_code"=>200,
 		    			"message"=>"Folder successful created ",
 		    		]);
-			}else{
-				return response()->json([
+			}
+			return response()->json([
 		    			"status"=>"error",
 		    			"status_code"=>403,
 		    			"message"=>"An problem ocurred creating folder '".$dir."'",
 		    	]);
-			}
 		} catch (Exception $e) {
 			return response()->json([
 		    			"status"=>"error",

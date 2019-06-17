@@ -4,17 +4,15 @@
 		<meta charset="UTF-8">
 		<title>MasterInformatic File Manager</title>
 
+		<link rel="stylesheet" href="{{ asset('css/FileManager.css') }}">
+		<link rel="stylesheet" href="{{ asset('FileManager/css/cropper.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('FileManager/css/dropzone.css') }}">
 
-		
-				<link rel="stylesheet" href="{{ asset('css/FileManager.css') }}">
-				<link rel="stylesheet" href="{{ asset('FileManager/css/cropper.min.css') }}">
-				<link rel="stylesheet" href="{{ asset('FileManager/css/dropzone.css') }}">
-
-				<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-				<script src="{{ asset('FileManager/js/cropper.js') }}"></script>
-				<script src="{{ asset('FileManager/js/download.js') }}"></script>
-				<script src="{{ asset('FileManager/js/dropzone.js') }}"></script>
+		<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="{{ asset('FileManager/js/cropper.js') }}"></script>
+		<script src="{{ asset('FileManager/js/download.js') }}"></script>
+		<script src="{{ asset('FileManager/js/dropzone.js') }}"></script>
 
 </head>
 <body>
@@ -48,7 +46,6 @@
 			@yield('manager::FileManager')
 	
 </div>
-
 <script src="{{ asset('FileManager/js/FileManager.js') }}"></script>
 
 
@@ -71,87 +68,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-
-		var btnMkDir = $("#btnMkDir");
-		var modalRename = $("#modalRename");
-		var btnCloseModal = $("#btnCloseModal");
-		var btnCancel = $("#btnCancel");
-		var btnSave = $("#btnSave");
-		var mkdirname = $("#mkdirname");
-
-		function getData(path){
-				$.get("/filemanager/getfiles"+path, function(data, status){
-					$("#shwfiles").text("");
-					$("#shwfiles").append(data);
-				});
-		}
-		
-		/*ENVIO Y CREACION DE DIRECTORIO*/
-		function sendMkDir(){
-				var p = btnMkDir.attr("data-path");
-				var v = mkdirname.val();
-				var c = p+v;
-
-				$.post( "/filemanager/mkdir", { d_path: p,d_name: v })
-						.done(function( data ) {
-								if(data.status=="success"){
-
-										alert(data.message);
-										modalRename.removeClass("show");
-										location.reload();
-
-								}else{
-										alert(data.message);
-								}
-				});
-		}
-
-		eventsListener();
-
-		function eventsListener(){
-				$("div.mi-toggle a").click(function(e){
-						e.preventDefault();
-						getData(e.target.getAttribute("href"));
-						btnMkDir.attr("data-path",e.target.getAttribute("href"));
-				});
-				btnMkDir.click(function(){
-						modalRename.addClass("show");
-						var p = btnMkDir.attr("data-path");
-				});
-				btnCloseModal.click(function(){
-						modalRename.removeClass("show");
-				});
-				btnCancel.click(function(){
-						modalRename.removeClass("show");
-				});
-				btnSave.click(function(){
-						sendMkDir();
-				});
-		}
-
-
-</script>
 
 
 		<script>
@@ -177,7 +93,7 @@
 		}
 		</script>
 
-
+ 
 
 {{-- <script>
 

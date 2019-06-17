@@ -13,8 +13,8 @@
 - upload files async
 - drag and drop support
 
-## Installation
 
+## Installation
 
 ### Setup
 

@@ -41,7 +41,7 @@ class Build extends ScanDir{
                }
         }
         return self::$menu;
-    }
+    } 
 
     static function countFolders($items){
         $var = 0;
