@@ -14,7 +14,7 @@ class Build extends ScanDir{
   }
 
   public static function isDirectoryReaderDos($items){
-
+ 
         foreach ($items as $i) {
                if($i->type=="folder"){
                     if(self::countFolders($i->items)==0){
