@@ -49,7 +49,6 @@ class ScanDir
 
         $files = array();
 
-
         if(file_exists($dir)){
         
             foreach(scandir($dir) as $f) {
@@ -59,19 +58,16 @@ class ScanDir
                 }
 
                 if(!is_dir($dir . '/' . $f)) {
-
                      $files[] = new Files($f,"file",self::removeFullPath($dir).'/'.$f,filesize($dir.'/'.$f));
-                    
                 }
             }
-        
         }
 
         return $files;
     }
 
-     public static function removeFullPath($string){
-      return str_replace(public_path(), "", $string);
+    public static function removeFullPath($string){
+        return str_replace(public_path(), "", $string);
     }
 
 }

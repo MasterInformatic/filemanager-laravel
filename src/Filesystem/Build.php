@@ -14,23 +14,53 @@ class Build extends ScanDir{
   }
 
   public static function isDirectoryReaderDos($items){
+
         foreach ($items as $i) {
                if($i->type=="folder"){
-                    self::$menu .= 
-                    "<li ondrop='drop(event)' ondragover='allowDrop(event)' data-path='".self::removeFullPath($i->path)."'>
-                <div class='mi-toggle'>
-                    <span class='fldr'><i class='fa fa-folder'></i></span>
-                    <span class='text'><a href='?directory=".self::removeFullPath($i->path)."'>".$i->name."</a></span>  
-                    <span class='caretDown'><i class='fa fa-arrow-right'></i></span>
-                </div>
-                <ul class='nested'>"; 
+                    if(self::countFolders($i->items)==0){
+                        self::$menu .= 
+                            "<li ondrop='drop(event)' ondragover='allowDrop(event)' data-path='".self::removeFullPath($i->path)."'>
+                        <div class='mi-toggle'>
+                            <span class='fldr'><i class='fa fa-folder'></i></span>
+                            <span class='text'><a href='?directory=".self::removeFullPath($i->path)."'>".$i->name."(".self::countFiles($i->items).")</a></span>  
+                        </div>
+                        <ul class='nested'>"; 
+                    }else{
+                        self::$menu .= 
+                            "<li ondrop='drop(event)' ondragover='allowDrop(event)' data-path='".self::removeFullPath($i->path)."'>
+                        <div class='mi-toggle'>
+                            <span class='fldr'><i class='fa fa-folder'></i></span>
+                            <span class='text'><a href='?directory=".self::removeFullPath($i->path)."'>".$i->name."(".self::countFiles($i->items).")</a></span>  
+                            <span class='caretDown'><i class='fa fa-arrow-right'></i></span>
+                        </div>
+                        <ul class='nested'>"; 
+                    }
+
                     self::isDirectoryReaderDos($i->items);
                     self::$menu .= "</ul></li>";
-               }else{
-                  // self::$menu .= "<li>".$i->name."</li>";
                }
         }
         return self::$menu;
+    }
+
+    static function countFolders($items){
+        $var = 0;
+        foreach ($items as $i) {
+            if($i->type=="folder"){
+                $var++;
+            }
+        }
+        return $var;
+    }
+
+    static function countFiles($items){
+        $var = 0;
+        foreach ($items as $i) {
+            if($i->type=="file"){
+                $var++;
+            }
+        }
+        return $var;
     }
 
     public static function removeFullPath($string){

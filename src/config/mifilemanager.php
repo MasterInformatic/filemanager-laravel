@@ -2,7 +2,6 @@
 
 return [
 
-	/*dir to scan*/
     'dir' => public_path()."/",
 
     'directory' => "/storage/",
@@ -71,8 +70,6 @@ return [
         'image/svg+xml',
     ],
  
-    // available since v1.3.0
-    // only when '/laravel-filemanager?type=Files'
     'valid_file_mimetypes' => [
         'image/jpeg',
         'image/pjpeg',

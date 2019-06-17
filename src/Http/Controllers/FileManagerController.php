@@ -30,6 +30,7 @@ class FileManagerController extends Controller
         $path = str_replace('?directory=', "", $request->d_path);
         $success = Folder::createDir("$request->d_name",$path);
         return $success;
+        // return response()->json(["status"=>"success","message"=>"bien"]);
     }
 
     //
@@ -97,7 +98,7 @@ class FileManagerController extends Controller
         ]);
 	}
 
- 
+  
 	public function upload(Request $request){
 
 		$file = $request->file('upload');
