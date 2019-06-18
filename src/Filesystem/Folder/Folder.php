@@ -11,10 +11,19 @@ use Exception;
 
 class Folder{
 
+	
+	public $name;
+	public $type;
+	public $path;
+	public $items ;
 
-	public function __construct(){
-
+	public function __construct($name,$type,$path,$items){
+		$this->name=$name;
+		$this->type=$type;
+		$this->path=$path;
+		$this->items=$items;
 	}
+
 
 	static function createDir($dir,$path){
 		try {

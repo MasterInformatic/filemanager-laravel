@@ -2,8 +2,9 @@
 
 namespace MasterInformatic\filemanagerlaravel\Filesystem;
 
-use MasterInformatic\filemanagerlaravel\Filesystem\Folders;
-use MasterInformatic\filemanagerlaravel\Filesystem\File;
+
+use MasterInformatic\filemanagerlaravel\Filesystem\File\File;
+use MasterInformatic\filemanagerlaravel\Filesystem\Folder\Folder;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Config;
@@ -35,7 +36,7 @@ class ScanDir
                 }else {
                     $extension = strtolower(FacedeFile::extension($f));
 
-                    $files[] = new Files(
+                    $files[] = new File(
                         $f,//name
                         "file",//type
                         $f,//path
@@ -94,23 +95,55 @@ class ScanDir
                     continue; // Ignore hidden files
                 }
 
-                if(!is_dir($dir . '/' . $f)) {
+                if(!is_dir($dir . '/' . $f)) {//es folder
 
                     $extension = strtolower(FacedeFile::extension($f));
-
-                    $files[] = new Files(
-                        $f,//name
-                        "file",//type
-                        self::removeFullPath($dir).'/'.$f,//path
-                        static::humanizeSize(filesize($dir.'/'.$f)),//size
-                        static::getIcon($extension),//icon
-                        static::getFileType($extension)//type name
                     
+                    if(File::isImageFile(self::removeFullPath($dir).'/'.$f)){
 
+                        $files[] = new File(
+                            $f,//name
+                            "file",//type
+                            self::removeFullPath($dir).'/'.$f,//path
+                            static::humanizeSize(filesize($dir.'/'.$f)),//size
+                            static::getIcon($extension),//icon
+                            static::getFileType($extension)//type name
+                        );
+                    }else{
+                        
+                        if(!Config::get('mifilemanager.filesConfig.showImagesOnly')){
+
+                            $icons_url = 
+                            Config::get('mifilemanager.file_urls_array.'.$extension);
+                            if(empty($icons_url)){
+                                $icons_url ="";
+                            }
+
+                            $files[] = new File(
+                                $f,//name
+                                "file",//type
+                                $icons_url,//path
+                                static::humanizeSize(filesize($dir.'/'.$f)),//size
+                                static::getIcon($extension),//icon
+                                static::getFileType($extension)//type name
+                            );
+
+                        }
+
+                    }
+
+
+                }else{
+                    $files[] =  new Folder(
+                        $f,
+                        "folder",
+                        self::removeFullPath($dir).'/'.$f,
+                        self::scanDos($dir.'/'.$f)
                     );
                 }
             }
         }
+
 
         return $files;
     }

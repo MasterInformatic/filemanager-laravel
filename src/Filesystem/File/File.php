@@ -4,6 +4,7 @@ namespace MasterInformatic\filemanagerlaravel\Filesystem\File;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File as FacedeFile;
 use Exception;
+use ImageUpload;
 
 class File extends UploadedFile{
 
@@ -70,6 +71,21 @@ class File extends UploadedFile{
 
 	public function getTname() { 
 		return $this->tname; 
+	}
+
+	static function isImageFile($path){
+		$mime = FacedeFile::mimeType(public_path($path));
+		$mimeImages =  [
+	        "image/jpeg",
+	        "image/pjpeg",
+	        "image/png" ,
+	        "image/gif",
+	        "image/svg+xml",
+    	];
+        if (in_array($mime, $mimeImages)){
+            return true;
+        }
+        return false;
 	}
 
 	static function upload($request){

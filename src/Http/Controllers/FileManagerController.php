@@ -79,22 +79,37 @@ class FileManagerController extends Controller
         $items = '';
         foreach (ScanDir::scanFiles() as $i) {
 
-            $items .= "<div class='item' data-url='".url($i->path)."' data-name='".$i->name."' data-id='".$i->name."' draggable='true' ondragstart='drag(event)' id='".$i->name."'>
-                <div class='img'>
-                    <img src='".url($i->path)."' alt='' width='250px' height='250px' draggable='false'>
-                </div>
-                <div class='data'>
-                    <span>".$i->name."</span>
-                    <br>
-                    <span>".$i->size."</span>
-                </div>
-                <div class='select'>
-                    <div class='con'>
-                       <div class='triangle'></div>
-                        <img src='https://cdn2.iconfinder.com/data/icons/check-mark-style-1/1052/check_mark_voting_yes_no_20-512.png' alt=''>
+            if($i->type=='folder'){
+
+                // $items .= "<div class='item'>
+                //     <div class='img'>
+                //         <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Folder_1_icon-72a7cf.svg/1024px-Folder_1_icon-72a7cf.svg.png' alt='' idth='250px' height='250px'>
+                //     </div>
+                //     <div class='data'>
+                //         <span>".$i->name."</span>
+                //     </div>
+                // </div>";
+                
+            }else{
+
+                $items .= "<div class='item' data-url='".url($i->path)."' data-name='".$i->name."' data-id='".$i->name."' draggable='true' ondragstart='drag(event)' id='".$i->name."'>
+                    <div class='img'>
+                        <img src='".url($i->path)."' alt='' width='250px' height='250px' draggable='false'>
                     </div>
-                </div>
-            </div>";
+                    <div class='data'>
+                        <span>".$i->name."</span>
+                        <br>
+                        <span>".$i->size."</span>
+                    </div>
+                    <div class='select'>
+                        <div class='con'>
+                           <div class='triangle'></div>
+                            <img src='https://cdn2.iconfinder.com/data/icons/check-mark-style-1/1052/check_mark_voting_yes_no_20-512.png' alt=''>
+                        </div>
+                    </div>
+                </div>";
+            }
+
         }
 
         return $items;

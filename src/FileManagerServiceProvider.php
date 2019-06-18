@@ -13,8 +13,7 @@ class FileManagerServiceProvider extends ServiceProvider
      */ 
     public function register()
     {
-        //
-         // require_once __DIR__ . '/Helpers/HumanizeFolders.php';
+
     }
 
     /**
@@ -47,6 +46,10 @@ class FileManagerServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/Assets' => public_path('FileManager'),
+        ], 'public');
+
+        $this->publishes([
+            __DIR__.'/Assets/css/FileManager.css' => public_path('css'),
         ], 'public');
 
 

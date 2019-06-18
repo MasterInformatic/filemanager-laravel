@@ -8,36 +8,23 @@
 
 - Show files for storage folder
 - easy config
-- easy integration for ckeditor
+- easy integration for CKEditor
 - create news folders async
 - upload files async
 - drag and drop support
+- Supported locales: en, es
+- Customizable routes for folder path
+
+## Screenshots
+
+> Grid view :
+
+![Screenshots]()
 
 
-## Installation
+> Grid view :
 
-### Setup
-
-
-> run the commands
-
-```shell
-composer require masterinformatic/filemanager-laravel
-```
-
-```shell
-php artisan vendor:publish 
-```
-- now select MasterInformatic/filemanager
-
-```shell
-php artisan storage:link
-```
-
-- finally edit config/mifilemanager.php
-
----
-
+![Screenshots]()
 
 ## Support
 

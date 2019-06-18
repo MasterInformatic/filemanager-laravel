@@ -6,16 +6,21 @@ return [
 
     'directory' => "storage",
 
+    'folderConfig' => [
+        'showInView' => false,//Show the folders together with the files
+    ],
+
     'imagesConfig' => [
         'maxSize'           => 0,
-        'allowedExtensions' => ['bmp','gif','jpeg','jpg','png'],
-        'deniedExtensions'  => [],
+        'allowedExtensions' => ['gif','jpeg','jpg','png'],
+        'deniedExtensions'  => ['svg'],
     ],
 
     'filesConfig' => [
         'maxSize'           => 0,
-        'allowedExtensions' => ['pdf'],
-        'deniedExtensions'  => ['txt'],
+        'allowedExtensions' => ['txt'],
+        'deniedExtensions'  => ['pdf'],
+        'showImagesOnly'  => true,
     ],
  
     'accessControl' => [
@@ -37,8 +42,10 @@ return [
         'png'  => 'PNG Image',
         'ppt'  => 'Microsoft PowerPoint',
         'pptx' => 'Microsoft PowerPoint',
+        'txt'  => 'Archivo de texto',
     ],
 
+    //used to list view
     'file_icon_array' => [
         'pdf'  => 'fa-file-pdf',
         'doc'  => 'fa-file-word',
@@ -52,7 +59,13 @@ return [
         'png'  => 'fa-file-image',
         'ppt'  => 'fa-file-powerpoint',
         'pptx' => 'fa-file-powerpoint',
+        'txt'  => 'fa-file-txt',
     ],
+
+    //used to grid view
+    'file_urls_array' => [
+        'txt' => 'https://cdn0.iconfinder.com/data/icons/document-file-types/512/txt-512.png',
+    ]
 
 ];
  
