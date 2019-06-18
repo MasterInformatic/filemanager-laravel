@@ -6,7 +6,12 @@
     var mkdirname = $("#mkdirname");
 
     var path_dir = "?directory=/storage/";
+    var path_back = "";
 
+      
+    $(document).ready(function(){
+      getData(path_dir);
+    });
 
 
     function getData(path){
@@ -16,6 +21,12 @@
         });
     }
     
+    function testOsmaraqlera(el){
+      var path = el.getAttribute("data-path");
+      getData("?directory="+path);
+    }
+
+
     function sendMkDir(){
         var p = btnMkDir.attr("data-path");
         var v = mkdirname.val();

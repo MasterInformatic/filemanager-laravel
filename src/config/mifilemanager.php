@@ -1,13 +1,13 @@
 <?php
 
-return [
+return [ 
  
     'dir' => public_path("storage"),
 
     'directory' => "storage",
 
     'folderConfig' => [
-        'showInView' => false,//Show the folders together with the files
+        'showInView' => true,//Show the folders together with the files
     ],
 
     'imagesConfig' => [
@@ -20,11 +20,11 @@ return [
         'maxSize'           => 0,
         'allowedExtensions' => ['txt'],
         'deniedExtensions'  => ['pdf'],
-        'showImagesOnly'  => true,
+        'showImagesOnly'  => false,
     ],
  
     'accessControl' => [
-        'FOLDER_CREATE'       => false,
+        'FOLDER_CREATE'       => true,
         'FILE_VIEW'           => true,
         'FILE_UPLOAD'         => true,
     ],

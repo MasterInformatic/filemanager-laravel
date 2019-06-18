@@ -72,7 +72,7 @@ class FileManagerController extends Controller
 
 	public function upload_ckeditor(){
 
-	}
+	} 
 
     public function getfiles(){
 
@@ -81,14 +81,16 @@ class FileManagerController extends Controller
 
             if($i->type=='folder'){
 
-                // $items .= "<div class='item'>
-                //     <div class='img'>
-                //         <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Folder_1_icon-72a7cf.svg/1024px-Folder_1_icon-72a7cf.svg.png' alt='' idth='250px' height='250px'>
-                //     </div>
-                //     <div class='data'>
-                //         <span>".$i->name."</span>
-                //     </div>
-                // </div>";
+                if(Config::get('mifilemanager.folderConfig.showInView')){
+                    $items .= "<div class='item' data-path='".$i->path."' ondblclick='testOsmaraqlera(this)'>
+                        <div class='img'>
+                            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Folder_1_icon-72a7cf.svg/1024px-Folder_1_icon-72a7cf.svg.png' alt='' idth='250px' height='250px'>
+                        </div>
+                        <div class='data'>
+                            <span>".$i->name."</span>
+                        </div>
+                    </div>";
+                }
                 
             }else{
 

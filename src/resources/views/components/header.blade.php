@@ -21,7 +21,7 @@
 
         <button class="btnTestOsmara" id="btnMkDir" data-path="{{ config('mifilemanager.directory') }}">
             <i class="fa fa-folder"></i>
-            <span>Crear Carpeta</span>
+            <span >Crear Carpeta</span>
         </button>
 
        {{--  <button class="btnTestOsmara " >
