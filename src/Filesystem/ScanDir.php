@@ -1,15 +1,15 @@
 <?php
 
 namespace MasterInformatic\filemanagerlaravel\Filesystem;
+ 
 
-
-use MasterInformatic\filemanagerlaravel\Filesystem\File\File;
 use MasterInformatic\filemanagerlaravel\Filesystem\Folder\Folder;
-
+use MasterInformatic\filemanagerlaravel\Filesystem\File\File;
+use Illuminate\Support\Facades\File as FacedeFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\File as FacedeFile;
+use ImageUpload;
 
 class ScanDir
 {   
@@ -42,7 +42,8 @@ class ScanDir
                         $f,//path
                         static::humanizeSize(filesize($dir.'/'.$f)),//size
                         static::getIcon($extension),//icon
-                        static::getFileType($extension)//type name
+                        static::getFileType($extension),
+                        null//type name
                     );
                     // dd($files[0]);
 
@@ -73,6 +74,9 @@ class ScanDir
         return $type;
     }
 
+    static function getThumb($file){
+        return storage_path('framework/cache/thumbs')."/".$file;
+    }
 
 
     static function scanFiles(){
@@ -101,14 +105,18 @@ class ScanDir
                     
                     if(File::isImageFile(self::removeFullPath($dir).'/'.$f)){
 
+
                         $files[] = new File(
                             $f,//name
                             "file",//type
                             self::removeFullPath($dir).'/'.$f,//path
                             static::humanizeSize(filesize($dir.'/'.$f)),//size
                             static::getIcon($extension),//icon
-                            static::getFileType($extension)//type name
+                            static::getFileType($extension),
+                            static::getThumb($f)    
                         );
+
+                        // dd($files);
                     }else{
                         
                         if(!Config::get('mifilemanager.filesConfig.showImagesOnly')){
@@ -125,7 +133,8 @@ class ScanDir
                                 $icons_url,//path
                                 static::humanizeSize(filesize($dir.'/'.$f)),//size
                                 static::getIcon($extension),//icon
-                                static::getFileType($extension)//type name
+                                static::getFileType($extension),
+                                'null'//type name
                             );
 
                         }

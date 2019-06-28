@@ -1,8 +1,9 @@
 <?php
 
 namespace MasterInformatic\filemanagerlaravel\Filesystem\File;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File as FacedeFile;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cache;
 use Exception;
 use ImageUpload;
 
@@ -14,8 +15,9 @@ class File extends UploadedFile{
 	public $size;
 	public $icon;
 	public $tname;
+	public $thumb;
 
-	public function __construct($name,$type,$path,$size,$icon,$tname){
+	public function __construct($name,$type,$path,$size,$icon,$tname,$thumb){
 		$this->name=$name;
 		$this->type=$type;
 		$this->path=$path;
@@ -23,6 +25,7 @@ class File extends UploadedFile{
 		$this->size=$size;
 		$this->icon=$icon;
 		$this->tname=$tname;
+		$this->thumb=$thumb;
 	}
 
 
@@ -73,6 +76,14 @@ class File extends UploadedFile{
 		return $this->tname; 
 	}
 
+	public function setThumb($thumb) { 
+		$this->thumb = $thumb;
+	}
+
+	public function getThumb() { 
+		return $this->thumb; 
+	}
+
 	static function isImageFile($path){
 		$mime = FacedeFile::mimeType(public_path($path));
 		$mimeImages =  [
@@ -82,25 +93,46 @@ class File extends UploadedFile{
 	        "image/gif",
 	        "image/svg+xml",
     	];
-        if (in_array($mime, $mimeImages)){
+    	if (in_array($mime, $mimeImages)){
             return true;
         }
         return false;
 	}
 
+ 	
+	static function removeslashes($string){
+		$string=implode("",explode("\\",$string));
+		return stripslashes(trim($string));
+	}
+
+	static function fileExists($path){
+		if(FacedeFile::exists($path)){
+			return true;
+		}
+		return false;
+	}
+
+
 	static function upload($request){
 		
  		$file = $request->file('upload');
+ 	 	
+ 		$path = str_replace('?directory=/', "", $request->path_dir);
+ 		$path = str_replace('?directory=', "", $path);
+ 		$path = static::removeslashes($path);
+
 
  		try {
- 		 	$path = str_replace('?directory=/', "", $request->path_dir);
+ 		 	
         	$extension = $file->getClientOriginalExtension();
 			//procesamiento de imagenes 
 			if(static::isImage($file)){
 				//isAllowededExtencion
 				if(!static::isDeniedImage($extension) && static::isAllowedImage($extension)){
 					$name = $file->getClientOriginalName();
+					
 					ImageUpload::make($file)->save($path."/".$name);
+ 					
 				}else{
 					throw new Exception("Invalid Image or Denied Image", 1);
 				}
@@ -119,12 +151,19 @@ class File extends UploadedFile{
  		 		"status_code" => 200,
  		 		"message" => "upload success"
  		 	],200);
+
+ 		 } catch (NotWritableException $e) {
+ 		 	return response()->json([
+ 		 		"status" => "error",
+ 		 		"status_code" => 500,
+ 		 		"message" => "No se pudo subir el archivo, verifique los permisos de su carpta"
+ 		 	],500);
  		 } catch (Exception $e) {
  		 	return response()->json([
  		 		"status" => "error",
- 		 		"status_code" => 200,
- 		 		"message" => $e->getMessage() 
- 		 	],200);
+ 		 		"status_code" => 500,
+ 		 		"message" => $e->getMessage()
+ 		 	],500);
  		 } 
 
 	}

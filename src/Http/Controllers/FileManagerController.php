@@ -2,6 +2,7 @@
 
 namespace MasterInformatic\filemanagerlaravel\Http\Controllers;
 
+use MasterInformatic\filemanagerlaravel\Filesystem\File\DeletedFile;
 use MasterInformatic\filemanagerlaravel\Filesystem\Folder\Folder;
 use MasterInformatic\filemanagerlaravel\Filesystem\File\File;
 use MasterInformatic\filemanagerlaravel\Models\ImageStorage;
@@ -30,18 +31,15 @@ class FileManagerController extends Controller
         $path = str_replace('?directory=', "", $request->d_path);
         $success = Folder::createDir("$request->d_name",$path);
         return $success;
-        // return response()->json(["status"=>"success","message"=>"bien"]);
     }
 
     //
 	public function browser(){
 
-
 		return view('manager::files',[
             "images"=>ScanDir::scanFiles(),
             "menu" => Build::main(),
         ]);
-
 
 	}
 
@@ -51,31 +49,25 @@ class FileManagerController extends Controller
                 echo "<li>".$i->name."(".$i.")<ul>"; 
                 $this->isDirectoryReaderDos($i->items);
                 echo "</ul></li>";
-           }else{
-                // echo "<li>".$i->name."</li>";
            }
         }
     }
 
 
-	// public function browser_ckeditor(){
-	// 	$images = ImageStorage::all();  
-	// 	return view('manager::ckeditor.files',[
- //            "images"=>$images,
- //        ]);
-	// }
+	public function browser_ckeditor(){
+		$images = ImageStorage::all();  
+
+		return view('manager::ckeditor.files',[
+            "images"=>$images,
+        ]);
+	}
  
    
 	public function upload(Request $request){ 
         return File::upload($request);
 	}
 
-	public function upload_ckeditor(){
-
-	} 
-
     public function getfiles(){
-
         $items = '';
         foreach (ScanDir::scanFiles() as $i) {
 
@@ -91,10 +83,10 @@ class FileManagerController extends Controller
                         </div>
                     </div>";
                 }
-                
+                 
             }else{
 
-                $items .= "<div class='item' data-url='".url($i->path)."' data-name='".$i->name."' data-id='".$i->name."' draggable='true' ondragstart='drag(event)' id='".$i->name."'>
+                $items .= "<div class='item' data-url='".url($i->path)."' data-name='".$i->name."' data-id='".$i->name."' draggable='true' ondragstart='drag(event)' id='".$i->name."' ondblclick='ckd(this)'>
                     <div class='img'>
                         <img src='".url($i->path)."' alt='' width='250px' height='250px' draggable='false'>
                     </div>
@@ -117,15 +109,33 @@ class FileManagerController extends Controller
         return $items;
 
     }
+ 
+    public function delete(Request $request){
+        $path = str_replace("?directory=/", "", $request->path_dir);
+        $path = str_replace('?directory=', "", $path);
+        $path = File::removeslashes($path);
+        $f_path = public_path($path."/".$request->name);
+
+        // dd($f_path);
+        if(DeletedFile::delete($f_path)){
+            return response()->json([
+                "status" => "success",
+                "status_code" => 200,
+                "message" => "File deleted successful"
+            ],200);
+        }
+
+        return response()->json([
+                "status" => "error",
+                "status_code" => 404,
+                "message" => "File not found"
+            ],404);
+    }
 
     public function copyfiles(Request $request){
-
         $file = str_replace(url("/"), "",$request->file_path);
         $file_name = $request->file_name;
         $to = $request->to_url;
-
-       // $success = \File::copy(public_path()."/".$file,public_path()."/".$to."/".$file_name);
- 
         return response()->json(true);
     }
 

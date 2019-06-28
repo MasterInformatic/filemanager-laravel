@@ -22,7 +22,7 @@ class Build extends ScanDir{
                             "<li ondrop='drop(event)' ondragover='allowDrop(event)' data-path='".self::removeFullPath($i->path)."'>
                         <div class='mi-toggle'>
                             <span class='fldr'><i class='fa fa-folder'></i></span>
-                            <span class='text'><a href='?directory=".self::removeFullPath($i->path)."'>".$i->name."(".self::countFiles($i->items).")</a></span>  
+                            <span class='text'><a href='?directory=".self::removeFullPath($i->path)."'>".$i->name."</a></span>  
                         </div>
                         <ul class='nested'>"; 
                     }else{
@@ -30,7 +30,7 @@ class Build extends ScanDir{
                             "<li ondrop='drop(event)' ondragover='allowDrop(event)' data-path='".self::removeFullPath($i->path)."'>
                         <div class='mi-toggle'>
                             <span class='fldr'><i class='fa fa-folder'></i></span>
-                            <span class='text'><a href='?directory=".self::removeFullPath($i->path)."'>".$i->name."(".self::countFiles($i->items).")</a></span>  
+                            <span class='text'><a href='?directory=".self::removeFullPath($i->path)."'>".$i->name."</a></span>  
                             <span class='caretDown'><i class='fa fa-arrow-right'></i></span>
                         </div>
                         <ul class='nested'>"; 

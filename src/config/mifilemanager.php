@@ -19,7 +19,7 @@ return [
     'filesConfig' => [
         'maxSize'           => 0,
         'allowedExtensions' => ['txt'],
-        'deniedExtensions'  => ['pdf'],
+        'deniedExtensions'  => [''],
         'showImagesOnly'  => false,
     ],
  
@@ -65,6 +65,26 @@ return [
     //used to grid view
     'file_urls_array' => [
         'txt' => 'https://cdn0.iconfinder.com/data/icons/document-file-types/512/txt-512.png',
+    ],
+
+    'folder_settings' => [
+        [
+            'name'              => 'packs',
+            'directory'         => 'packs',
+            'maxSize'           => 0,
+            'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
+            'deniedExtensions'  => '',
+            'backend'           => 'default'
+        ],
+        [
+            'name'              => 'packs',
+            'directory'         => 'packs',
+            'maxSize'           => 0,
+            'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
+            'deniedExtensions'  => '',
+            'backend'           => 'default'
+        ],
+        
     ]
 
 ];

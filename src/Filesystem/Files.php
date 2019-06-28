@@ -11,7 +11,7 @@ class Files{
 	public $icon;
 	public $tname;
 
-	public function __construct($name,$type,$path,$size,$icon,$tname){
+	public function __construct($name,$type,$path,$size,$icon,$tname,$thumb){
 		$this->name=$name;
 		$this->type=$type;
 		$this->path=$path;

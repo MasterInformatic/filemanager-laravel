@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File as FacedeFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
+use ImageUpload;
 
 class UploadedFile{ 
 
@@ -37,7 +38,7 @@ class UploadedFile{
         }
         return false;
 	}
-
+ 
 	static function isDeniedFile($extension){
 		$allowedExtensions = 
 		Config::get('mifilemanager.filesConfig.deniedExtensions');
@@ -65,4 +66,6 @@ class UploadedFile{
         }
         return false;
 	} 
+
+	
 }

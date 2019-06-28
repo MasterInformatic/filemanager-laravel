@@ -36,8 +36,6 @@
     function getElementByClassName(e, className){
         var el = e.srcElement || e.target;
 
-
-
         if ( el.classList.contains(className) ) {
             return el;
         } else {
@@ -111,10 +109,10 @@
 
     addClickListener('item');
     addDblClickListener('item');
-
+ 
 
 </script>
-
+ 
 {{-- <script src="{{ asset('FileManager/FileManager.js') }}"></script> --}}
 <script>
         

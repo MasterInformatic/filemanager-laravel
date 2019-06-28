@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>MasterInformatic File Manager</title>
 
-		<link rel="stylesheet" href="{{ asset('css/FileManager.css') }}">
+		<link rel="stylesheet" href="{{ asset('FileManager/css/FileManager.css') }}">
 		<link rel="stylesheet" href="{{ asset('FileManager/css/cropper.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('FileManager/css/dropzone.css') }}">
 
@@ -18,7 +18,7 @@
 <body>
 		
 @include('manager::components.header')
-
+ 
 @include('manager::components.sidebar')
 
 @include('manager::components.menu')
@@ -46,25 +46,14 @@
 			@yield('manager::FileManager')
 	
 </div>
+
+
+
+
 <script src="{{ asset('FileManager/js/FileManager.js') }}"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script>
+	MIFileManager.init();
+</script>
 
 
 
@@ -344,8 +333,23 @@
 				x.send();
 		}
 
-		if(link.getAttribute("data-action")=="Rename"){
-			// modalRename.classList.add("show");
+		if(link.getAttribute("data-action")=="Delete"){
+			    var formdata = new FormData();
+			  	var ajax = new XMLHttpRequest();
+			  	formdata.append("name", name);
+			  	formdata.append("path_dir", path_dir);
+			  	ajax.addEventListener("load", function(event){
+			  		if(event.target.status==200){
+			  			var ele = document.getElementById(name);
+			  			ele.parentNode.removeChild(ele);
+			  		}
+			  	}, false);
+			  	ajax.open("POST", "/filemanager/delete"); 
+			  	ajax.send(formdata);
+		}
+
+		if(link.getAttribute("data-action")=="Select"){
+
 		}
 
 		toggleMenuOff();

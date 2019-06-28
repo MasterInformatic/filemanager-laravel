@@ -1,29 +1,72 @@
+(function($) {
+
+    this.MIFileManager = function() {
+
+  }
+
+  MIFileManager.init = function(){
+    initMi();
+  }
+
+  function initMi(){
+    getDataXhttp("?directory=/storage/");
+  }
+
+})(jQuery);
+
+
+
+
     var btnMkDir = $("#btnMkDir");
     var modalRename = $("#modalRename");
     var btnCloseModal = $("#btnCloseModal");
     var btnCancel = $("#btnCancel");
     var btnSave = $("#btnSave");
     var mkdirname = $("#mkdirname");
-
     var path_dir = "?directory=/storage/";
     var path_back = "";
+ 
+  var ajax = new XMLHttpRequest();
 
-      
-    $(document).ready(function(){
-      getData(path_dir);
-    });
-
-
-    function getData(path){
-        $.get("/filemanager/getfiles"+path, function(data, status){
-          $("#shwfiles").text("");
-          $("#shwfiles").append(data);
-        });
-    }
+    function getDataXhttp(path){
+      ajax.addEventListener("progress", pH, false);
+      ajax.addEventListener("load", cH, false);
+      ajax.addEventListener("error", eH, false);
+      ajax.addEventListener("abort", aH, false);
+      ajax.open("GET", "/filemanager/getfiles"+path); 
+      ajax.send();
+  }
     
+  function pH(event) {
+    $("#shwfiles").text("Cargando...");
+  }
+
+  function cH(event) {
+    $("#shwfiles").text("");
+    if(event.target.status==200){
+          $("#shwfiles").append(event.target.response);
+    }else{
+      $("#shwfiles").text("Error");
+    }
+  }
+
+  function eH(event) {
+    $("#shwfiles").text("");
+  }
+
+  function aH(event) {
+    $("#shwfiles").text("");
+  }
+
+
+
     function testOsmaraqlera(el){
       var path = el.getAttribute("data-path");
-      getData("?directory="+path);
+
+      btnMkDir.attr("data-path","?directory="+path);
+      path_dir = "?directory=/"+path;
+ 
+      getDataXhttp("?directory="+path);
     }
 
 
@@ -46,16 +89,29 @@
 
     eventsListener();
 
+      function chanbg(el){/*======*/
+        for (var i = 0; i < $("div.mi-toggle a").length; i++) {
+              $("div.mi-toggle a")[i]
+                .parentElement
+                .parentElement
+                .style
+                .background = "#f2f2f2";
+            }
+            el.parentElement
+                .parentElement
+                .style
+                .background = "#d5d5d5";
+      }
+
     function eventsListener(){
       
       $("div.mi-toggle a").click(function(e){
         e.preventDefault();
-        getData(e.target.getAttribute("href"));
+        getDataXhttp(e.target.getAttribute("href"));
         btnMkDir.attr("data-path",e.target.getAttribute("href"));
-
         path_dir  = e.target.getAttribute("href");
+        chanbg(this);/*======*/
       });
-
       btnMkDir.click(function(){
         modalRename.addClass("show");
         var p = btnMkDir.attr("data-path");
@@ -89,7 +145,7 @@ upload_form.on('drag dragstart dragend dragover dragenter dragleave drop', funct
     droppedFiles = e.originalEvent.dataTransfer.files;
     uploadFile();
   });
-
+ 
 
     function drag(ev) {
     }
@@ -106,6 +162,12 @@ upload_form.on('drag dragstart dragend dragover dragenter dragleave drop', funct
 function _(el) {
   return document.getElementById(el);
 }
+
+// return response()->json([
+//                 "uploaded" => 1,
+//                 "fileName" => $name,
+//                 "url" => "http://masterinformatic2.0.mi/storage/".$name
+//             ],200);
 
 function uploadFile() {
 
@@ -145,7 +207,7 @@ function quitSt(){
 
 function completeHandler(event) {
    _("prgv").style.width = "100%";
-   getData(path_dir);
+   getDataXhttp(path_dir);
 }
 
 function errorHandler(event) {
@@ -180,3 +242,36 @@ function readURL(input) {
     }
     reader.readAsDataURL(input);
 }
+
+
+function ckd(ele){
+    var path = ele.getAttribute("data-url");
+    returnFileUrl(path);
+}
+        
+        function getUrlParam( paramName ) {
+            var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
+            var match = window.location.search.match( reParam );
+
+            return ( match && match.length > 1 ) ? match[1] : null;
+        }
+
+        function returnFileUrl(url) {
+            var funcNum = getUrlParam('CKEditorFuncNum');
+            var fileUrl = url;
+            window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl, function(){
+
+                // Get the reference to a dialog window.
+                var dialog = this.getDialog();
+                // Check if this is the Image Properties dialog window.
+                if ( dialog.getName() == 'image' ) {
+                    // Get the reference to a text field that stores the "alt" attribute.
+                    var element = dialog.getContentElement( 'info', 'txtAlt' );
+                    // Assign the new value.
+                    if ( element )
+                        element.setValue( 'MasterInformatic Image' );
+                }
+
+            });
+            window.close();
+        }
