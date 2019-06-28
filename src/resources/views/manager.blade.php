@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="{{ asset('FileManager/css/cropper.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('FileManager/css/dropzone.css') }}">
 
-		<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="{{ asset('FileManager/js/cropper.js') }}"></script>
 		<script src="{{ asset('FileManager/js/download.js') }}"></script>
