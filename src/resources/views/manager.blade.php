@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="{{ asset('FileManager/css/FileManager.css') }}">
 		<link rel="stylesheet" href="{{ asset('FileManager/css/cropper.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('FileManager/css/dropzone.css') }}">
+		<link rel="stylesheet" href="{{ asset('FileManager/css/gifplayer.css') }}">
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -14,9 +15,10 @@
 		<script src="{{ asset('FileManager/js/download.js') }}"></script>
 		<script src="{{ asset('FileManager/js/dropzone.js') }}"></script>
 
+		<script src="{{ asset('FileManager/js/jquery.gifplayer.js') }}"></script>
 </head>
 <body>
-		
+		 
 @include('manager::components.header')
  
 @include('manager::components.sidebar')
@@ -48,16 +50,10 @@
 </div>
 
 
-
-
-<script src="{{ asset('FileManager/js/FileManager.js') }}"></script>
-<script>
-	MIFileManager.init();
-</script>
-
-
-
-
+		<script src="{{ asset('FileManager/js/FileManager.js') }}"></script>
+		<script>
+			MIFileManager.init();
+		</script>
 
 		<script>
 		var toggler = document.getElementsByClassName("caretDown");

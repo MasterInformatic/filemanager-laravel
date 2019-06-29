@@ -81,12 +81,15 @@ class ScanDir
 
     static function scanFiles(){
 
+
         if(isset($_GET["directory"])){
             $dir = public_path($_GET["directory"]);
 
         }else{
             $dir = config('mifilemanager.dir');
         }
+        
+        // dd(($dir));
 
 
         $files = array();

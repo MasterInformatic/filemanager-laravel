@@ -2,6 +2,7 @@
 
 namespace MasterInformatic\filemanagerlaravel\Filesystem\File;
 use Illuminate\Support\Facades\File as FacedeFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cache;
 use Exception;
@@ -131,7 +132,20 @@ class File extends UploadedFile{
 				if(!static::isDeniedImage($extension) && static::isAllowedImage($extension)){
 					$name = $file->getClientOriginalName();
 					
-					ImageUpload::make($file)->save($path."/".$name);
+					if ($file->getClientOriginalExtension() == 'gif') {
+					    copy($file->getRealPath(), $path."/".$name);
+					    
+        				if (!file_exists(public_path("storage/thumbs/"))) {
+                            FacedeFile::makeDirectory(public_path("storage/thumbs/"), $mode = 0777, true, true);
+                        }
+                        
+                        // $file->storeAs("/thumbs",$name);
+						// Storage::disk("local")->put("thumbs/".$name,FacedeFile::get($file));
+						ImageUpload::make($file)->save($path."/thumbs/".$name);
+					}else{
+
+						ImageUpload::make($file)->save($path."/".$name);
+					}
  					
 				}else{
 					throw new Exception("Invalid Image or Denied Image", 1);

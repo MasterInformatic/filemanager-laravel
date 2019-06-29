@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use ImageUpload;
+use Response;
 
 
 class FileManagerController extends Controller
@@ -67,6 +68,13 @@ class FileManagerController extends Controller
         return File::upload($request);
 	}
 
+    public function getIm($filename){
+        $file = Storage::disk("local")->get("thumbs/".$filename);
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", "image/png");
+        return $response;
+    }
+
     public function getfiles(){
         $items = '';
         foreach (ScanDir::scanFiles() as $i) {
@@ -85,10 +93,17 @@ class FileManagerController extends Controller
                 }
                  
             }else{
+                
+                if(strtolower(FacedeFile::extension($i->path)) == "gif"){
+                    $path_ = "
+                      <img src='".url('storage/thumbs/'.$i->name)."' width='250px' height='250px' draggable='false' data-gif='".url($i->path)."' class='gif'>";
+                }else{
+                    $path_ = "<img src='".url($i->path)."' alt='' width='250px' height='250px' draggable='false' />";
+                }
 
                 $items .= "<div class='item' data-url='".url($i->path)."' data-name='".$i->name."' data-id='".$i->name."' draggable='true' ondragstart='drag(event)' id='".$i->name."' ondblclick='ckd(this)'>
                     <div class='img'>
-                        <img src='".url($i->path)."' alt='' width='250px' height='250px' draggable='false'>
+                         $path_
                     </div>
                     <div class='data'>
                         <span>".$i->name."</span>

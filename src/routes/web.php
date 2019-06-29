@@ -25,6 +25,9 @@ Route::group(['namespace' => 'MasterInformatic\filemanagerlaravel\Http\Controlle
 	Route::post('filemanager/delete','FileManagerController@delete');
 
 
+	Route::get('filemanager/get/{filename}','FileManagerController@getIm');
+
+
 	// Route::get('filemanager/copyfiles','FileManagerController@copyfiles')->name('fmcpfiles');
 	
 
