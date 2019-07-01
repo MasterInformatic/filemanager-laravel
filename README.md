@@ -2,13 +2,13 @@
 
 <p align="center">
 
-  <a href="http://masterinformatic.github.io/filemanager-laravel/installation">Installation</a>
+  <a href="http://masterinformatic.github.io/filemanager-laravel/docs/installation">Installation</a>
 ・
-  <a href="http://masterinformatic.github.io/filemanager-laravel/integration">Integration</a>
+  <a href="http://masterinformatic.github.io/filemanager-laravel/docs/integration">Integration</a>
 ・
-  <a href="http://masterinformatic.github.io/filemanager-laravel/config">Config</a>
+  <a href="http://masterinformatic.github.io/filemanager-laravel/docs/config">Config</a>
 ・
-  <a href="http://masterinformatic.github.io/filemanager-laravel/customization">Customization</a>
+  <a href="http://masterinformatic.github.io/filemanager-laravel/docs/customization">Customization</a>
 ・
   <a href="https://www.masterinformatic.com/demos/filemanager">Demo</a>
 </p>
@@ -31,9 +31,11 @@
 
 ## Screenshots
 
+-icons and images for files not includes for the moment
+
 > Grid view :
 
-![Screenshots]()
+![Screenshots](http://masterinformatic.github.io/filemanager-laravel/docs/grid.png)
 
 
 > Grid view :
