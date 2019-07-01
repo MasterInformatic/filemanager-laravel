@@ -17,8 +17,9 @@ class File extends UploadedFile{
 	public $icon;
 	public $tname;
 	public $thumb;
+	public $mime;
 
-	public function __construct($name,$type,$path,$size,$icon,$tname,$thumb){
+	public function __construct($name,$type,$path,$size,$icon,$tname,$thumb,$mime=null){
 		$this->name=$name;
 		$this->type=$type;
 		$this->path=$path;
@@ -27,6 +28,7 @@ class File extends UploadedFile{
 		$this->icon=$icon;
 		$this->tname=$tname;
 		$this->thumb=$thumb;
+		$this->mime=$mime;
 	}
 
 
@@ -99,7 +101,6 @@ class File extends UploadedFile{
         }
         return false;
 	}
-
  	
 	static function removeslashes($string){
 		$string=implode("",explode("\\",$string));
@@ -113,15 +114,16 @@ class File extends UploadedFile{
 		return false;
 	}
 
-
 	static function upload($request){
-		
+		 
  		$file = $request->file('upload');
- 	 	
  		$path = str_replace('?directory=/', "", $request->path_dir);
  		$path = str_replace('?directory=', "", $path);
  		$path = static::removeslashes($path);
 
+ 		if(empty($path)){
+ 			$path = 'storage/';
+ 		}
 
  		try {
  		 	
@@ -133,24 +135,22 @@ class File extends UploadedFile{
 					$name = $file->getClientOriginalName();
 					
 					if ($file->getClientOriginalExtension() == 'gif') {
-					    copy($file->getRealPath(), $path."/".$name);
-					    
+
+						$path = str_replace("storage", "", $path);
+						$file->storeAs("public/".$path,$name);
+						
         				if (!file_exists(public_path("storage/thumbs/"))) {
                             FacedeFile::makeDirectory(public_path("storage/thumbs/"), $mode = 0777, true, true);
                         }
-                        
-                        // $file->storeAs("/thumbs",$name);
-						// Storage::disk("local")->put("thumbs/".$name,FacedeFile::get($file));
-						ImageUpload::make($file)->save($path."/thumbs/".$name);
+						ImageUpload::make($file)->save("storage/thumbs/".$name);
 					}else{
-
 						ImageUpload::make($file)->save($path."/".$name);
 					}
  					
 				}else{
 					throw new Exception("Invalid Image or Denied Image", 1);
 				}
-			}else{
+			}else{ 
 				//isAllowedFile
 				if(!static::isDeniedFile($extension) && 
 					static::isAllowedFile($extension)){
@@ -163,7 +163,10 @@ class File extends UploadedFile{
 			return response()->json([
  		 		"status" => "success",
  		 		"status_code" => 200,
- 		 		"message" => "upload success"
+ 		 		"message" => "upload success",
+ 		 		"uploaded" => 1,
+                "fileName" => $name,
+                "url" => url("storage/".$name)
  		 	],200);
 
  		 } catch (NotWritableException $e) {

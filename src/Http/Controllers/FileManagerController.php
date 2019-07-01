@@ -5,7 +5,6 @@ namespace MasterInformatic\filemanagerlaravel\Http\Controllers;
 use MasterInformatic\filemanagerlaravel\Filesystem\File\DeletedFile;
 use MasterInformatic\filemanagerlaravel\Filesystem\Folder\Folder;
 use MasterInformatic\filemanagerlaravel\Filesystem\File\File;
-use MasterInformatic\filemanagerlaravel\Models\ImageStorage;
 use MasterInformatic\filemanagerlaravel\Filesystem\ScanDir;
 use MasterInformatic\filemanagerlaravel\Filesystem\Build;
 use Illuminate\Support\Facades\File as FacedeFile;
@@ -75,6 +74,31 @@ class FileManagerController extends Controller
         return $response;
     }
 
+    public function getPlayer($i){
+        $mimeImages =  [
+            "image/jpeg",
+            "image/pjpeg",
+            "image/png" ,
+            "image/svg+xml",
+        ];
+        $mimeGif = ["image/gif"];
+        $mimeVideo = ["video/mp4"];
+
+
+        if (in_array($i->mime, $mimeGif)){
+            return "<img src='".url('storage/thumbs/'.$i->name)."' width='250px' height='250px' draggable='false' data-gif='".url($i->path)."' class='gif'>";
+        }else if(in_array($i->mime, $mimeImages)){
+            return "<img src='".url($i->path)."' alt='' width='250px' height='250px' draggable='false' />";
+        }else if(in_array($i->mime, $mimeVideo)){
+            return "<video width='250px' height='250px'>
+                      <source src='".url($i->path)."' type='video/mp4'>
+                    </video>";
+        }else{
+            return "<img src='".$i->icon."' alt='' width='250px' height='250px' draggable='false' />";
+        }
+
+    }
+  
     public function getfiles(){
         $items = '';
         foreach (ScanDir::scanFiles() as $i) {
@@ -94,16 +118,9 @@ class FileManagerController extends Controller
                  
             }else{
                 
-                if(strtolower(FacedeFile::extension($i->path)) == "gif"){
-                    $path_ = "
-                      <img src='".url('storage/thumbs/'.$i->name)."' width='250px' height='250px' draggable='false' data-gif='".url($i->path)."' class='gif'>";
-                }else{
-                    $path_ = "<img src='".url($i->path)."' alt='' width='250px' height='250px' draggable='false' />";
-                }
-
                 $items .= "<div class='item' data-url='".url($i->path)."' data-name='".$i->name."' data-id='".$i->name."' draggable='true' ondragstart='drag(event)' id='".$i->name."' ondblclick='ckd(this)'>
                     <div class='img'>
-                         $path_
+                         ".$this->getPlayer($i)."
                     </div>
                     <div class='data'>
                         <span>".$i->name."</span>

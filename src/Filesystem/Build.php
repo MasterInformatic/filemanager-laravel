@@ -67,6 +67,4 @@ class Build extends ScanDir{
       return str_replace(public_path(), "", $string);
     }
 
-
-
 }

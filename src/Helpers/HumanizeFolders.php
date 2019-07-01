@@ -12,9 +12,8 @@ class HumanizeFolders {
                 echo "<li>".$i->name."<ul>"; 
                 $this->isDirectoryReaderDos($i->items);
                 echo "</ul></li>";
-           }else{
-                // echo "<li>".$i->name."</li>";
            }
+           
         }
     }
 }

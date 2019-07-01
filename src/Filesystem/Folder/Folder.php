@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\File;
 use Exception;
 
 class Folder{
-
 	
 	public $name;
 	public $type;
@@ -23,7 +22,6 @@ class Folder{
 		$this->path=$path;
 		$this->items=$items;
 	}
-
 
 	static function createDir($dir,$path){
 		try {
@@ -51,17 +49,13 @@ class Folder{
 		    			"message"=>"Folder successful created ",
 		    		]);
 			}
-			return response()->json([
-		    			"status"=>"error",
-		    			"status_code"=>403,
-		    			"message"=>"An problem ocurred creating folder '".$dir."'",
-		    	]);
+			throw new Exception("An problem ocurred creating folder '".$dir."'", 1);
 		} catch (Exception $e) {
 			return response()->json([
-		    			"status"=>"error",
-		    			"status_code"=>403,
-		    			"message"=>$e->getMessage(),
-		    		]);
+		    	"status"=>"error",
+		    	"status_code"=>403,
+		    	"message"=>$e->getMessage(),
+		    ]);
 		}
 	}
 

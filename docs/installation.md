@@ -34,6 +34,18 @@ php artisan vendor:publish
 php artisan storage:link
 ```
 
+> Now set this in the config/app.php
+
+```
+
+providers
+Intervention\Image\ImageServiceProvider::class
+
+aliases
+'ImageUpload' => Intervention\Image\Facades\Image::class
+
+```
+
 - finally edit config/mifilemanager.php
 
 ---
@@ -45,6 +57,8 @@ Reach out to me at one of the following places!
 
 - Website at <a href="http://masterinformatic.com" target="_blank">`masterinformatic.com`</a>
 - Twitter at <a href="http://twitter.com/MasInfo_oficial" target="_blank">`@MasInfo_oficial`</a>
+- Instagram at <a href="https://www.instagram.com/masterinformatic.oficial/" target="_blank">`@masterinformatic.oficial`</a>
+- Facebook at <a href="http://facebook.com/masterinformatic.oficial/" target="_blank">`@masterinformatic.oficial`</a>
 
 
 ---

@@ -23,7 +23,6 @@ class FileManagerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
 
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'manager');
@@ -37,21 +36,8 @@ class FileManagerServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__.'/resources/views' => resource_path('views/mi/filemanager'),
-        ]);
-
-        $this->publishes([
-            __DIR__.'/resources/views' => resource_path('views/mi/filemanager'),
-        ]);
-
-        $this->publishes([
             __DIR__.'/Assets' => public_path('FileManager'),
         ], 'public');
-
-        $this->publishes([
-            __DIR__.'/Assets/css/FileManager.css' => public_path('css'),
-        ], 'public');
-
 
     } 
 }

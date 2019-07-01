@@ -11,10 +11,6 @@ use ImageUpload;
 
 class UploadedFile{ 
 
-	public function __construct(){
-
-	}
-
 	static function isImage($file){
 		$mime = $file->getClientMimeType();
 		$mimeImages =  [
@@ -67,5 +63,4 @@ class UploadedFile{
         return false;
 	} 
 
-	
 }

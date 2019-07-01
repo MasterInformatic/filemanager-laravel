@@ -11,17 +11,12 @@ use ImageUpload;
 
 class DeletedFile extends File{ 
 
-	public function __construct(){
-
-	}
-
 	static function delete($path){
         if(static::fileExists($path)){
 			FacedeFile::delete($path);
 			return true;
 		}
 		return false;
-
 	}
 
 	

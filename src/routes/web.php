@@ -27,14 +27,4 @@ Route::group(['namespace' => 'MasterInformatic\filemanagerlaravel\Http\Controlle
 
 	Route::get('filemanager/get/{filename}','FileManagerController@getIm');
 
-
-	// Route::get('filemanager/copyfiles','FileManagerController@copyfiles')->name('fmcpfiles');
-	
-
 }); 
-
-
-
-
-// Route::post('filemanager/ckeditor/upload');
-// Route::get('filemanager/ckeditor/browser');

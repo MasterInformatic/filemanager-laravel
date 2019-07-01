@@ -21,7 +21,6 @@ class Files{
 		$this->tname=$tname;
 	}
 
-
 	public function setName($name) { 
 		$this->name = $name;
 	}

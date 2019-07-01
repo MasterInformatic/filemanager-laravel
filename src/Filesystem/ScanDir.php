@@ -75,7 +75,7 @@ class ScanDir
     }
 
     static function getThumb($file){
-        return storage_path('framework/cache/thumbs')."/".$file;
+        return public_path('storage/thumbs')."/".$file;
     }
 
 
@@ -89,9 +89,6 @@ class ScanDir
             $dir = config('mifilemanager.dir');
         }
         
-        // dd(($dir));
-
-
         $files = array();
 
         if(file_exists($dir)){
@@ -105,10 +102,12 @@ class ScanDir
                 if(!is_dir($dir . '/' . $f)) {//es folder
 
                     $extension = strtolower(FacedeFile::extension($f));
-                    
+                    $mime = FacedeFile::mimeType($dir.'/'.$f);
+
                     if(File::isImageFile(self::removeFullPath($dir).'/'.$f)){
 
-
+                        //IMAGENES!!
+                        //CONSTRUCCION DE LA IMAGEN
                         $files[] = new File(
                             $f,//name
                             "file",//type
@@ -116,36 +115,43 @@ class ScanDir
                             static::humanizeSize(filesize($dir.'/'.$f)),//size
                             static::getIcon($extension),//icon
                             static::getFileType($extension),
-                            static::getThumb($f)    
+                            // static::getThumb($f),
+                            null,
+                            $mime    
                         );
 
-                        // dd($files);
                     }else{
-                        
+                        // OTROS ARCHIVOS!!
                         if(!Config::get('mifilemanager.filesConfig.showImagesOnly')){
 
+                            // ICONO DEL TIPO DE ARCHIVO!!!
+                            //CONFIGURAR ESTO A GUSTO, por le momento
+                            //se queda asi obligatoriamente
                             $icons_url = 
                             Config::get('mifilemanager.file_urls_array.'.$extension);
                             if(empty($icons_url)){
                                 $icons_url ="";
                             }
 
+                            //CONSTRUCCION DEL ARCHIVO
                             $files[] = new File(
                                 $f,//name
                                 "file",//type
-                                $icons_url,//path
+                                self::removeFullPath($dir).'/'.$f,//path
                                 static::humanizeSize(filesize($dir.'/'.$f)),//size
-                                static::getIcon($extension),//icon
+                                // static::getIcon($extension),//icon
+                                $icons_url,
                                 static::getFileType($extension),
-                                'null'//type name
+                                null,
+                                $mime//type name
                             );
 
                         }
 
                     }
 
-
                 }else{
+                    //CONSTRUCCION DEL FOLDER
                     $files[] =  new Folder(
                         $f,
                         "folder",
@@ -155,7 +161,6 @@ class ScanDir
                 }
             }
         }
-
 
         return $files;
     }

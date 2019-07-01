@@ -48,6 +48,8 @@
     }else{
       $("#shwfiles").text("Error");
     }
+
+    $(".gif").jqGifPreview();
   }
 
   function eH(event) {
