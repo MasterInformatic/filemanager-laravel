@@ -35,8 +35,12 @@
       ajax.addEventListener("abort", aH, false);
       ajax.open("GET", "/filemanager/getfiles"+path); 
       ajax.send();
+
+
+       
   }
-    
+  
+
   function pH(event) {
     $("#shwfiles").text("Cargando...");
   }
@@ -50,6 +54,8 @@
     }
 
     $(".gif").jqGifPreview();
+
+  
   }
 
   function eH(event) {
@@ -210,11 +216,11 @@ function quitSt(){
 function completeHandler(event) {
    _("prgv").style.width = "100%";
    getDataXhttp(path_dir);
+   alert(JSON.parse(event.target.response).message);
 }
 
 function errorHandler(event) {
   _("status").innerHTML = "Upload Failed";
-
 }
 
 function abortHandler(event) {

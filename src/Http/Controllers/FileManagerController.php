@@ -16,12 +16,9 @@ use Illuminate\Http\Request;
 use ImageUpload;
 use Response;
 
-
-class FileManagerController extends Controller
-{   
+class FileManagerController extends Controller{   
 
     protected $file_location;
-
 
     function __construct(){
         $this->file_location = Config::get('mifilemanager.directory');
@@ -83,7 +80,7 @@ class FileManagerController extends Controller
         ];
         $mimeGif = ["image/gif"];
         $mimeVideo = ["video/mp4"];
-
+        $mimePDF = ["application/pdf"];
 
         if (in_array($i->mime, $mimeGif)){
             return "<img src='".url('storage/thumbs/'.$i->name)."' width='250px' height='250px' draggable='false' data-gif='".url($i->path)."' class='gif'>";
@@ -93,6 +90,8 @@ class FileManagerController extends Controller
             return "<video width='250px' height='250px'>
                       <source src='".url($i->path)."' type='video/mp4'>
                     </video>";
+        }else if(in_array($i->mime, $mimePDF)){
+            return "<iframe src='".url($i->path)."' width='100%' style='height:100%' frameborder='0' scrolling='no'>Dont support</iframe>";
         }else{
             return "<img src='".$i->icon."' alt='' width='250px' height='250px' draggable='false' />";
         }
@@ -100,6 +99,7 @@ class FileManagerController extends Controller
     }
   
     public function getfiles(){
+
         $items = '';
         foreach (ScanDir::scanFiles() as $i) {
 

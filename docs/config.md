@@ -1,64 +1,41 @@
-# File Manager Laravel
-
-> A simple and powerful file manager for laravel
-
-> compatible with ckeditor
-
-**Features**
-
-- Show files for storage folder
-- easy config
-- easy integration for ckeditor
-- create news folders async
-- upload files async
-- drag and drop support
-
-## Installation
 
 
-### Setup
+### In the 'config/mifilemanager.php'
+
+## Startup Views:
+
+| Key                   | Type   | Description                                                     |
+|-----------------------|--------|-----------------------------------------------------------------|
+| showImagesOnly		| boolean | Only show images and folders.	                		   	   |
+| showInView			| boolean | Hidde the folders in the view.							   	   |
+| FILE_VIEW				| boolean | Show or not files in the view(except images ).			   	   |
 
 
-> run the commands
+## Upload / Validation:
 
-```shell
-composer require masterinformatic/filemanager-laravel
-```
-
-```shell
-php artisan vendor:publish 
-```
-- now select MasterInformatic/filemanager
-
-```shell
-php artisan storage:link
-```
-
-> Now set this in the config/app.php
-
-```
-
-providers
-Intervention\Image\ImageServiceProvider::class
-
-aliases
-'ImageUpload' => Intervention\Image\Facades\Image::class
-
-```
-
-- finally edit config/mifilemanager.php
-
----
+| Key                        | Type    | Description                                                               |
+|----------------------------|---------|---------------------------------------------------------------------------|
+| maxSize           		 | int     | Specify max size of uploading image or file.                              |
+| allowedExtensions			 | array   | Specify the files allowed to upload.      			                       |
+| deniedExtensions			 | array   | Specify the files not allowed to upload.      			                   |
+| FOLDER_CREATE				 | boolean | Allowed create folders.      			                       			   |
+| FILE_UPLOAD				 | boolean | Allowed or denied file upload(all files and images).	     			   |
 
 
-## Support
+## File Extension Information
 
-Reach out to me at one of the following places!
+| Key               | Type  | Description                                 |
+|-------------------|-------|---------------------------------------------|
+| file\_type\_array | array | Map file extension with display names.      |
+| file\_icon\_array | array | Map file extension with icons(font-awsome). |
+| file\_urls\_array | array | Map file extension with images. 			  |
 
-- Website at <a href="http://masterinformatic.com" target="_blank">`masterinformatic.com`</a>
-- Twitter at <a href="http://twitter.com/MasInfo_oficial" target="_blank">`@MasInfo_oficial`</a>
-- Instagram at <a href="https://www.instagram.com/masterinformatic.oficial/" target="_blank">`@masterinformatic.oficial`</a>
-- Facebook at <a href="http://facebook.com/masterinformatic.oficial/" target="_blank">`@masterinformatic.oficial`</a>
+
+## Folder configuration (Not available)
+
+| Key               | Type  | Description                                 |
+|-------------------|-------|---------------------------------------------|
+| folder\_settings  | array | Map the directories with his rules.    	  |
 
 
 ---

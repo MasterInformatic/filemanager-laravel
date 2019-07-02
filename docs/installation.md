@@ -12,41 +12,54 @@
 - create news folders async
 - upload files async
 - drag and drop support
+- Supported locales: en, es
+- Customizable routes for folder path
+- support videos upload
+- support view videos
+- play/pause gifs
 
 ## Installation
 
-
-### Setup
-
-
-> run the commands
+###Download
+> run the command
 
 ```shell
 composer require masterinformatic/filemanager-laravel
 ```
 
-```shell
-php artisan vendor:publish 
+### Setup
+
+
+#####Add service providers
 ```
-- now select MasterInformatic/filemanager
-
-```shell
-php artisan storage:link
-```
-
-> Now set this in the config/app.php
-
-```
-
-providers
 Intervention\Image\ImageServiceProvider::class
 
-aliases
+```
+
+#####And add class aliases
+```
 'ImageUpload' => Intervention\Image\Facades\Image::class
 
 ```
 
-- finally edit config/mifilemanager.php
+#####Publish the package’s config and assets 
+
+```shell
+php artisan vendor:publish --tag=mifm_config
+php artisan vendor:publish --tag=mifm_public
+```
+
+#####Run commands to clear cache 
+```shell
+php artisan route:clear
+php artisan config:clear
+```
+
+#####Create symbolic link 
+
+```shell
+php artisan storage:link
+```
 
 ---
 

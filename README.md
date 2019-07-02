@@ -8,8 +8,6 @@
 ・
   <a href="http://masterinformatic.github.io/filemanager-laravel/docs/config">Config</a>
 ・
-  <a href="http://masterinformatic.github.io/filemanager-laravel/docs/customization">Customization</a>
-・
   <a href="https://www.masterinformatic.com/demos/filemanager">Demo</a>
 </p>
 
@@ -22,12 +20,15 @@
 
 - Show files for storage folder
 - easy config
-- easy integration for CKEditor
+- easy integration for ckeditor
 - create news folders async
 - upload files async
 - drag and drop support
 - Supported locales: en, es
 - Customizable routes for folder path
+- support videos upload
+- support view videos
+- play/pause gifs
 
 ## Screenshots
 
@@ -40,7 +41,7 @@
 
 > Grid view :
 
-![Screenshots]()
+![Screenshots](http://masterinformatic.github.io/filemanager-laravel/docs/filemanagerlaravel.PNG)
 
 ## Support
 
@@ -48,6 +49,9 @@ Reach out to me at one of the following places!
 
 - Website at <a href="http://masterinformatic.com" target="_blank">`masterinformatic.com`</a>
 - Twitter at <a href="http://twitter.com/MasInfo_oficial" target="_blank">`@MasInfo_oficial`</a>
+- Instagram at <a href="https://www.instagram.com/masterinformatic.oficial/" target="_blank">`@masterinformatic.oficial`</a>
+- Facebook at <a href="http://facebook.com/masterinformatic.oficial/" target="_blank">`@masterinformatic.oficial`</a>
+
 
 ---
 
