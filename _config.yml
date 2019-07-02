@@ -1,1 +1,10 @@
-theme: jekyll-theme-cayman
+theme: jekyll-theme-cayman# Setup
+
+title: File Manager Laravel
+description: It´s a powerful file manager for your laravel projects
+google_analytics: UA-143180076-1
+
+# About/contact
+author:
+  name: MasterInformatic
+  url: https://github.com/MasterInformatic
