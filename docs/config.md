@@ -1,4 +1,15 @@
+# File Manager Laravel
 
+<p align="center">
+
+  <a href="http://masterinformatic.github.io/filemanager-laravel/docs/installation">Installation</a>
+・
+  <a href="http://masterinformatic.github.io/filemanager-laravel/docs/integration">Integration</a>
+・
+  <a href="http://masterinformatic.github.io/filemanager-laravel/docs/config">Config</a>
+・
+  <a href="https://www.masterinformatic.com/demos/filemanager">Demo</a>
+</p>
 
 ### In the 'config/mifilemanager.php'
 
