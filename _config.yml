@@ -1,5 +1,6 @@
 theme: jekyll-theme-cayman# Setup
 
+#setup
 title: File Manager Laravel
 description: It´s a powerful file manager for your laravel projects
 google_analytics: UA-143180076-1
