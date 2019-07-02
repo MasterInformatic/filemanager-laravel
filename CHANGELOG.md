@@ -1,7 +1,7 @@
 # Changelog
 All changes to this project will be documented in this file.
 
-##2.0
+## 2.0
 - bugs fixed
 - support videos upload
 - support view videos
@@ -9,7 +9,7 @@ All changes to this project will be documented in this file.
 - new configs options
 - thumbs files only gif,image,video
 
-##1.5.0
+## 1.5.0
 - optimized
 - support gifs upload
 - create thumbs of gifs

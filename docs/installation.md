@@ -1,26 +1,9 @@
 # File Manager Laravel
 
-> A simple and powerful file manager for laravel
-
-> compatible with ckeditor
-
-**Features**
-
-- Show files for storage folder
-- easy config
-- easy integration for ckeditor
-- create news folders async
-- upload files async
-- drag and drop support
-- Supported locales: en, es
-- Customizable routes for folder path
-- support videos upload
-- support view videos
-- play/pause gifs
 
 ## Installation
 
-###Download
+### Download
 > run the command
 
 ```shell
@@ -30,32 +13,32 @@ composer require masterinformatic/filemanager-laravel
 ### Setup
 
 
-#####Add service providers
+##### Add service providers
 ```
 Intervention\Image\ImageServiceProvider::class
 
 ```
 
-#####And add class aliases
+##### And add class aliases
 ```
 'ImageUpload' => Intervention\Image\Facades\Image::class
 
 ```
 
-#####Publish the package’s config and assets 
+##### Publish the package’s config and assets 
 
 ```shell
 php artisan vendor:publish --tag=mifm_config
 php artisan vendor:publish --tag=mifm_public
 ```
 
-#####Run commands to clear cache 
+##### Run commands to clear cache 
 ```shell
 php artisan route:clear
 php artisan config:clear
 ```
 
-#####Create symbolic link 
+##### Create symbolic link 
 
 ```shell
 php artisan storage:link

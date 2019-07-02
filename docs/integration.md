@@ -4,7 +4,7 @@
 
 ### Setup
 
-#####In the config.js
+##### In the config.js
 
 ```shell
 
