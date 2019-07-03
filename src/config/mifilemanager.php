@@ -63,8 +63,11 @@ return [
     ],
 
     //used to grid view
+    //you can modify this for your custom icons
+    //the files are in the project in the public pat
+    //example:  FileManager/imgs/custom-icon.png
     'file_urls_array' => [
-        'txt' => 'https://cdn0.iconfinder.com/data/icons/document-file-types/512/txt-512.png',
+        'txt' => "FileManager/imgs/file-txt.png",
     ],
 
     'folder_settings' => [
@@ -73,16 +76,14 @@ return [
             'directory'         => 'packs',
             'maxSize'           => 0,
             'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
-            'deniedExtensions'  => '',
-            'backend'           => 'default'
+            'deniedExtensions'  => ''
         ],
         [
             'name'              => 'packs',
             'directory'         => 'packs',
             'maxSize'           => 0,
             'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
-            'deniedExtensions'  => '',
-            'backend'           => 'default'
+            'deniedExtensions'  => ''
         ],
         
     ]

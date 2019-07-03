@@ -65,7 +65,6 @@ Reach out to me at one of the following places!
 - Instagram at <a href="https://www.instagram.com/masterinformatic.oficial/" target="_blank">`@masterinformatic.oficial`</a>
 - Facebook at <a href="http://facebook.com/masterinformatic.oficial/" target="_blank">`@masterinformatic.oficial`</a>
 
-
 ---
 
 

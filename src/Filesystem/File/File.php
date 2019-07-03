@@ -148,7 +148,7 @@ class File extends UploadedFile{
 					}
  					
 				}else{
-					throw new Exception("Invalid Image or Denied Image", 1);
+					throw new Exception(trans('mifilemanager::mifm.erro-file-di'), 1);
 				}
 			}else{ 
 				//isAllowedFile

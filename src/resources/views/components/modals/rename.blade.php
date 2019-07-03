@@ -10,13 +10,13 @@
 		<div class="form">
 			<div class="header">
 				<span>
-					Renombrar
+					{{ trans('mifilemanager::mifm.mc-mdl-rn') }}
 				</span>
 			</div>
 			<div class="body">
 				<div>
 					<p>
-						Introduzca el nuevo nombre
+						{{ trans('mifilemanager::mifm.mc-mdl-rn-in') }}
 					</p>
 				</div>
 				<form action="">
@@ -24,8 +24,8 @@
 				</form>
 			</div>
 			<div class="footer">
-				<button id="btnSave">Guardar</button>
-				<button id="btnCancel">Cancelar</button>
+				<button id="btnSave">{{ trans('mifilemanager::mifm.mc-save') }}</button>
+				<button id="btnCancel">{{ trans('mifilemanager::mifm.mc-cancel') }}</button>
 			</div>
 		</div>
 

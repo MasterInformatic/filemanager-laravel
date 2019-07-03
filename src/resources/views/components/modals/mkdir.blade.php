@@ -10,13 +10,13 @@
 		<div class="form">
 			<div class="header">
 				<span>
-					Crear carpeta
+					{{ trans('mifilemanager::mifm.mc-mdl-mkdir') }}
 				</span>
 			</div>
 			<div class="body">
 				<div>
 					<p>
-						Introduzca el nombre
+						{{ trans('mifilemanager::mifm.mc-mdl-mkdir-in') }}
 					</p>
 				</div>
 				<form action="">
@@ -24,8 +24,8 @@
 				</form>
 			</div>
 			<div class="footer">
-				<button id="btnSave">Guardar</button>
-				<button id="btnCancel">Cancelar</button>
+				<button id="btnSave">{{ trans('mifilemanager::mifm.mc-save') }}</button>
+				<button id="btnCancel">{{ trans('mifilemanager::mifm.mc-cancel') }}</button>
 			</div>
 		</div>
 

@@ -30,7 +30,6 @@ class FileManagerController extends Controller{
         return $success;
     }
 
-    //
 	public function browser(){
 
 		return view('manager::files',[
@@ -50,7 +49,6 @@ class FileManagerController extends Controller{
         }
     }
 
-
 	public function browser_ckeditor(){
 		$images = ImageStorage::all();  
 
@@ -58,7 +56,6 @@ class FileManagerController extends Controller{
             "images"=>$images,
         ]);
 	}
- 
    
 	public function upload(Request $request){ 
         return File::upload($request);
@@ -81,7 +78,7 @@ class FileManagerController extends Controller{
         $mimeGif = ["image/gif"];
         $mimeVideo = ["video/mp4"];
         $mimePDF = ["application/pdf"];
-
+  
         if (in_array($i->mime, $mimeGif)){
             return "<img src='".url('storage/thumbs/'.$i->name)."' width='250px' height='250px' draggable='false' data-gif='".url($i->path)."' class='gif'>";
         }else if(in_array($i->mime, $mimeImages)){
@@ -93,7 +90,7 @@ class FileManagerController extends Controller{
         }else if(in_array($i->mime, $mimePDF)){
             return "<iframe src='".url($i->path)."' width='100%' style='height:100%' frameborder='0' scrolling='no'>Dont support</iframe>";
         }else{
-            return "<img src='".$i->icon."' alt='' width='250px' height='250px' draggable='false' />";
+            return "<img src='".url($i->icon)."' alt='' width='250px' height='250px' draggable='false' />";
         }
 
     }

@@ -26,6 +26,7 @@ class FileManagerServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'manager');
+        $this->loadTranslationsFrom(__DIR__.'/lang', 'mifilemanager');
 
         $this->mergeConfigFrom(
             __DIR__.'/config/mifilemanager.php', 'mifilemanager'
@@ -33,11 +34,12 @@ class FileManagerServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/config/mifilemanager.php' => config_path('mifilemanager.php'),
-        ],'mifm_config');
+        ], 'mifm_config');
 
         $this->publishes([
             __DIR__.'/Assets' => public_path('FileManager'),
         ], 'mifm_public');
+
 
     } 
 }

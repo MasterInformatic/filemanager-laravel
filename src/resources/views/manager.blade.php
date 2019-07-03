@@ -78,43 +78,6 @@
 		}
 		</script>
 
- 
-
-{{-- <script>
-
-		function drag(ev) {
-			 ev.dataTransfer.setData("url", ev.target.getAttribute("data-url"));
-			 ev.dataTransfer.setData("name", ev.target.getAttribute("data-id"));
-			 ev.dataTransfer.effectAllowed = "copyMove";
-		}
-
-		function allowDrop(ev) {
-			ev.preventDefault();
-		}
-
-		function drop(ev) {
-			ev.preventDefault();
-
-				var file_url = ev.dataTransfer.getData("url");
-				var file_name = ev.dataTransfer.getData("name");
-
-				var url = findAncestor(ev.target,'.no-a');
-				url= url.getAttribute("data-path");
-
-				$.post( "/filemanager/copyfiles", { file_path: file_url,file_name: file_name, to_url: url })
-						.done(function( data ) {
-
-				});
-
-		}
-
-
-		function findAncestor (el, sel) {
-					while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
-					return el;
-			}
-</script> --}}
-
 
 <script>
 		(function() {

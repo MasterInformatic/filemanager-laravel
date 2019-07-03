@@ -1,8 +1,6 @@
 <?php 
 
-// Route::post('filemanager/upload','');
 Route::group(['namespace' => 'MasterInformatic\filemanagerlaravel\Http\Controllers'], function() {
-    //
 	Route::get('filemanager/browser','FileManagerController@browser')->name('fmbrowser');
 
 	Route::post('filemanager/upload','FileManagerController@upload')->name('fmupload');
