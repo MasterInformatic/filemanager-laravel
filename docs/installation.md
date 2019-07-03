@@ -1,7 +1,9 @@
 # File Manager Laravel
 
 <p align="center">
-
+  
+  <a href="https://masterinformatic.github.io/filemanager-laravel/">Home</a>
+・
   <a href="http://masterinformatic.github.io/filemanager-laravel/docs/installation">Installation</a>
 ・
   <a href="http://masterinformatic.github.io/filemanager-laravel/docs/integration">Integration</a>
@@ -10,6 +12,7 @@
 ・
   <a href="https://www.masterinformatic.com/demos/filemanager">Demo</a>
 </p>
+
 ## Installation
 
 ### Download

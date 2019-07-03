@@ -145,12 +145,11 @@ class FileManagerController extends Controller{
         $path = File::removeslashes($path);
         $f_path = public_path($path."/".$request->name);
 
-        // dd($f_path);
         if(DeletedFile::delete($f_path)){
             return response()->json([
                 "status" => "success",
                 "status_code" => 200,
-                "message" => "File deleted successful"
+                "message" => trans('mifilemanager::mifm.msg-file-d-scs')
             ],200);
         }
 

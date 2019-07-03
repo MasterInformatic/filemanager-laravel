@@ -32,24 +32,24 @@ class Folder{
 				        	$s = File::makeDirectory(public_path($path)."/".$dir, 0777, true, true);
 				    	}
 			    	}else{
-			    		throw new Exception("Folder already exists", 1);
+			    		throw new Exception(trans('mifilemanager::mifm.error-folder-ex'), 1);
 			    	
 			    	}
 				}else{
-					throw new Exception("Invalid Name Folder", 1);
+					throw new Exception(trans('mifilemanager::mifm.error-folder-nm'), 1);
 				}
 			}else{
-				throw new Exception("Permise denied", 1);
+				throw new Exception(trans('mifilemanager::mifm.error-folder-pd'), 1);
 			}
 
 			if($s){
 				return response()->json([
 		    			"status"=>"success",
 		    			"status_code"=>200,
-		    			"message"=>"Folder successful created ",
+		    			"message"=>trans('mifilemanager::mifm.msg-folder-scs'),
 		    		]);
 			}
-			throw new Exception("An problem ocurred creating folder '".$dir."'", 1);
+			throw new Exception(trans('mifilemanager::mifm.error-folder-mk').": ".$dir."'", 1);
 		} catch (Exception $e) {
 			return response()->json([
 		    	"status"=>"error",

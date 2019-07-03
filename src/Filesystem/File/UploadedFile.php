@@ -15,7 +15,7 @@ class UploadedFile{
 		$mime = $file->getClientMimeType();
 		$mimeImages =  [
 	        "image/jpeg",
-	        "image/pjpeg",
+	        "image/jpg",
 	        "image/png" ,
 	        "image/gif",
 	        "image/svg+xml",

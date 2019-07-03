@@ -129,7 +129,7 @@ class File extends UploadedFile{
  		 	
         	$extension = $file->getClientOriginalExtension();
 			//procesamiento de imagenes 
-			if(static::isImage($file)){
+			if(static::isImage($file)){//images
 				//isAllowededExtencion
 				if(!static::isDeniedImage($extension) && static::isAllowedImage($extension)){
 					$name = $file->getClientOriginalName();
@@ -148,22 +148,21 @@ class File extends UploadedFile{
 					}
  					
 				}else{
-					throw new Exception(trans('mifilemanager::mifm.erro-file-di'), 1);
+					throw new Exception(trans('mifilemanager::mifm.error-file-di'), 1);
 				}
-			}else{ 
-				//isAllowedFile
+			}else{ //file
 				if(!static::isDeniedFile($extension) && 
 					static::isAllowedFile($extension)){
 					$name = $file->getClientOriginalName();
 	                $file->move($path,$name); 
 				}else{
-					throw new Exception("Invalid File or Denied File", 1);
+					throw new Exception(trans('mifilemanager::mifm.error-file-di'), 1);
 				}
-			} 
+			}  
 			return response()->json([
  		 		"status" => "success",
  		 		"status_code" => 200,
- 		 		"message" => "upload success",
+ 		 		"message" => trans('mifilemanager::mifm.msg-file-scs'),
  		 		"uploaded" => 1,
                 "fileName" => $name,
                 "url" => url("storage/".$name)
@@ -173,7 +172,7 @@ class File extends UploadedFile{
  		 	return response()->json([
  		 		"status" => "error",
  		 		"status_code" => 500,
- 		 		"message" => "No se pudo subir el archivo, verifique los permisos de su carpta"
+ 		 		"message" => trans('mifilemanager::mifm.error-file-thr')
  		 	],500);
  		 } catch (Exception $e) {
  		 	return response()->json([
