@@ -21,6 +21,17 @@ All changes to this project will be documented in this file.
 - play/pause gifs
 - new configs options
 - thumbs files only gif,image,video
+- support copy files
+- added icons for files
+
+### 1.9.0
+- bugs fixed
+
+### 1.8.0
+- bugs fixed
+
+### 1.5.1
+- bugs fixed
 
 ### 1.5.0
 - optimized

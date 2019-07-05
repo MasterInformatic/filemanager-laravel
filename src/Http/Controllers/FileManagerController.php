@@ -35,6 +35,7 @@ class FileManagerController extends Controller{
 		return view('manager::files',[
             "images"=>ScanDir::scanFiles(),
             "menu" => Build::main(),
+            "menuActions" => Build::mainActions(),
         ]);
 
 	}
@@ -49,13 +50,7 @@ class FileManagerController extends Controller{
         }
     }
 
-	public function browser_ckeditor(){
-		$images = ImageStorage::all();  
 
-		return view('manager::ckeditor.files',[
-            "images"=>$images,
-        ]);
-	}
    
 	public function upload(Request $request){ 
         return File::upload($request);
@@ -156,15 +151,35 @@ class FileManagerController extends Controller{
         return response()->json([
                 "status" => "error",
                 "status_code" => 404,
-                "message" => "File not found"
+                "message" => trans('mifilemanager::mifm.error-file-404')
             ],404);
     }
 
     public function copyfiles(Request $request){
-        $file = str_replace(url("/"), "",$request->file_path);
-        $file_name = $request->file_name;
-        $to = $request->to_url;
-        return response()->json(true);
+
+        $to = str_replace("?directory=\\", "", $request->p_to);
+        $to = str_replace("?directory=", "", $to);
+        $to = $to."/".$request->filename;
+
+        $from = str_replace("?directory=\\", "", $request->p_from);
+        $from = str_replace("?directory=", "", $from);
+        $from = $from."/".$request->filename;
+
+        if($from == $to){
+            return response()->json([
+                "status" => "error",
+                "status_code" => 403,
+                "message" => "La ruta de destino y la de origen no pueden ser iguales"
+            ],403);
+        }
+
+        FacedeFile::copy(public_path($from), public_path($to));
+        
+        return response()->json([
+                "status" => "success",
+                "status_code" => 200,
+                "message" => "Files copied"
+        ],200);
     }
 
     public function download(Request $request){

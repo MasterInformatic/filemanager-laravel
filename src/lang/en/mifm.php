@@ -11,6 +11,7 @@ return [
     'mc-mdl-rn-in'         => 'Enter the new name',
 	'mc-save'         	   => 'Save',
     'mc-cancel'            => 'Cancel',
+    'mc-copy'            => 'Copy',
 
     'msg-file-scs'         => 'File uploaded successfully',
     'msg-file-d-scs'       => 'File deleted successfully',

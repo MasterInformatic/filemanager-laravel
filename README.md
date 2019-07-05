@@ -31,6 +31,7 @@
 - support videos upload
 - support view videos
 - play/pause gifs
+- support copy files
 
 ## Screenshots
 
@@ -57,7 +58,11 @@ Reach out to me at one of the following places!
 
 ---
 
+### Credits
 
+ * [@olivervogel](https://github.com/olivervogel) for the best and awesome [image library](https://github.com/Intervention/image).
+ 
+	
 ## License
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)

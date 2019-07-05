@@ -1,185 +1,204 @@
 (function($) {
 
-    this.MIFileManager = function() {
+	this.MIFileManager = function() {
 
   }
 
   MIFileManager.init = function(){
-    initMi();
+	initMi();
   }
 
   function initMi(){
-    getDataXhttp("?directory=/storage/");
+	getDataXhttp("?directory=/storage/");
   }
 
 })(jQuery);
 
-
-
-
-    var btnMkDir = $("#btnMkDir");
-    var modalRename = $("#modalRename");
-    var btnCloseModal = $("#btnCloseModal");
-    var btnCancel = $("#btnCancel");
-    var btnSave = $("#btnSave");
-    var mkdirname = $("#mkdirname");
-    var path_dir = "?directory=/storage/";
-    var path_back = "";
+	var btnMkDir = $("#btnMkDir");
+	var modalRename = $("#modalRename");
+	var btnCloseModal = $("#btnCloseModal");
+	var btnCancel = $("#btnCancel");
+	var btnSave = $("#btnSave");
+	var mkdirname = $("#mkdirname");
+	var path_dir = "?directory=/storage/";
+	var path_back = "";
  
   var ajax = new XMLHttpRequest();
 
-    function getDataXhttp(path){
-      ajax.addEventListener("progress", pH, false);
-      ajax.addEventListener("load", cH, false);
-      ajax.addEventListener("error", eH, false);
-      ajax.addEventListener("abort", aH, false);
-      ajax.open("GET", "/filemanager/getfiles"+path); 
-      ajax.send();
-
-
-       
-  }
+	function getDataXhttp(path){
+	  ajax.addEventListener("progress", pH, false);
+	  ajax.addEventListener("load", cH, false);
+	  ajax.addEventListener("error", eH, false);
+	  ajax.addEventListener("abort", aH, false);
+	  ajax.open("GET", "/filemanager/getfiles"+path); 
+	  ajax.send();
+	}
   
 
   function pH(event) {
-    $("#shwfiles").text("Cargando...");
+	$("#shwfiles").text("Cargando...");
   }
 
   function cH(event) {
-    $("#shwfiles").text("");
-    if(event.target.status==200){
-          $("#shwfiles").append(event.target.response);
-    }else{
-      $("#shwfiles").text("Error");
-    }
+	$("#shwfiles").text("");
+	if(event.target.status==200){
+		  $("#shwfiles").append(event.target.response);
+	}else{
+	  $("#shwfiles").text("Error");
+	}
 
-    $(".gif").jqGifPreview();
-
+	$(".gif").jqGifPreview();
   
   }
 
   function eH(event) {
-    $("#shwfiles").text("");
+	$("#shwfiles").text("");
   }
 
   function aH(event) {
-    $("#shwfiles").text("");
+	$("#shwfiles").text("");
   }
 
 
 
-    function testOsmaraqlera(el){
-      var path = el.getAttribute("data-path");
+	function testOsmaraqlera(el){
+	  var path = el.getAttribute("data-path");
 
-      btnMkDir.attr("data-path","?directory="+path);
-      path_dir = "?directory=/"+path;
+	  btnMkDir.attr("data-path","?directory="+path);
+	  path_dir = "?directory=/"+path;
  
-      getDataXhttp("?directory="+path);
-    }
+	  getDataXhttp("?directory="+path);
+	}
 
 
-    function sendMkDir(){
-        var p = btnMkDir.attr("data-path");
-        var v = mkdirname.val();
-        var c = p+v;
+	function sendMkDir(){
+		var p = btnMkDir.attr("data-path");
+		var v = mkdirname.val();
+		var c = p+v;
 
-        $.post( "/filemanager/mkdir", { d_path: p,d_name: v })
-          .done(function( data ) {
-            if(data.status=="success"){
-              alert(data.message);
-              modalRename.removeClass("show");
-              location.reload();
-            }else{
-              alert(data.message);
-            }
-          });
-    }
+		$.post( "/filemanager/mkdir", { d_path: p,d_name: v })
+		  .done(function( data ) {
+			if(data.status=="success"){
+			  alert(data.message);
+			  modalRename.removeClass("show");
+			  location.reload();
+			}else{
+			  alert(data.message);
+			}
+		  });
+	}
 
-    eventsListener();
+	eventsListener();
 
-      function chanbg(el){/*======*/
-        for (var i = 0; i < $("div.mi-toggle a").length; i++) {
-              $("div.mi-toggle a")[i]
-                .parentElement
-                .parentElement
-                .style
-                .background = "#f2f2f2";
-            }
-            el.parentElement
-                .parentElement
-                .style
-                .background = "#d5d5d5";
-      }
+	  function chanbg(el){/*======*/
+		for (var i = 0; i < $("div.mi-toggle a").length; i++) {
+			  $("div.mi-toggle a")[i]
+				.parentElement
+				.parentElement
+				.style
+				.background = "#f2f2f2";
+			}
+			el.parentElement
+				.parentElement
+				.style
+				.background = "#d5d5d5";
+	  }
 
-    function eventsListener(){
-      
-      $("div.mi-toggle a").click(function(e){
-        e.preventDefault();
-        getDataXhttp(e.target.getAttribute("href"));
-        btnMkDir.attr("data-path",e.target.getAttribute("href"));
-        path_dir  = e.target.getAttribute("href");
-        chanbg(this);/*======*/
-      });
-      btnMkDir.click(function(){
-        modalRename.addClass("show");
-        var p = btnMkDir.attr("data-path");
-      });
-      btnCloseModal.click(function(){
-        modalRename.removeClass("show");
-      });
-      btnCancel.click(function(){
-        modalRename.removeClass("show");
-      });
-      btnSave.click(function(){
-        sendMkDir();
-      });
-    }
+	function eventsListener(){
+	  
+	  //
+	  $("div.mi-toggle a.side").click(function(e){
+		e.preventDefault();
+		getDataXhttp(e.target.getAttribute("href"));
+		btnMkDir.attr("data-path",e.target.getAttribute("href"));
+		path_dir  = e.target.getAttribute("href");
+		chanbg(this);/*======*/
+	  });
+	  btnMkDir.click(function(){
+		modalRename.addClass("show");
+		var p = btnMkDir.attr("data-path");
+	  });
+	  btnCloseModal.click(function(){
+		modalRename.removeClass("show");
+	  });
+	  btnCancel.click(function(){
+		modalRename.removeClass("show");
+	  });
+	  btnSave.click(function(){
+		sendMkDir();
+	  });
+
+	  $("div.mi-toggle a.actions").click(function(e){
+		  e.preventDefault();
+		  $("#myModal").removeClass("h");
+
+		  console.log($(this).attr("href"))
+
+		  var p_to   = $(this).attr("href");
+		  var p_from = btnMkDir.attr("data-path");
+		  var filename = btnMkDir.attr("data-copy");
+
+		  var formdata = new FormData();
+		  var ajax = new XMLHttpRequest();
+
+		  formdata.append("p_to", p_to);
+		  formdata.append("p_from", p_from);
+		  formdata.append("filename", filename);
+		  ajax.open("POST", "/filemanager/copyfiles"); 
+		  ajax.send(formdata);
+ 
+
+	  });
+	}
 
 
 var upload_form = $("#asideContent");
 var droppedFiles = false;
 
 upload_form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+	e.preventDefault();
+	e.stopPropagation();
   })
   .on('dragover dragenter', function() {
-    upload_form.addClass('is-dragover');
+	upload_form.addClass('is-dragover');
   })
   .on('dragleave dragend drop', function() {
-    upload_form.removeClass('is-dragover');
+	upload_form.removeClass('is-dragover');
   })
   .on('drop', function(e) {
-    droppedFiles = e.originalEvent.dataTransfer.files;
-    uploadFile();
+	droppedFiles = e.originalEvent.dataTransfer.files;
+	uploadFile();
   });
  
 
-    function drag(ev) {
-    }
+	function drag(ev) {
+	}
 
-    function allowDrop(ev) {
-      ev.preventDefault();
-    }
+	function allowDrop(ev) {
+	  ev.preventDefault();
+	}
 
-    function drop(ev) {
-      ev.preventDefault();
-    }
+	function drop(ev) {
+	  ev.preventDefault();
+	}
 
   
 function _(el) {
   return document.getElementById(el);
 }
 
-// return response()->json([
-//                 "uploaded" => 1,
-//                 "fileName" => $name,
-//                 "url" => "http://masterinformatic2.0.mi/storage/".$name
-//             ],200);
+function uploadFile(file_h=null) {
+  
+  var file = null;
+  console.log(file_h);
+  if(file_h == null){
 
-function uploadFile() {
+	  file = droppedFiles[0];
+  }else{
 
-  var file = droppedFiles[0];
+	  file = file_h;
+  }
+	console.log(file);
   var formdata = new FormData();
   var ajax = new XMLHttpRequest();
 
@@ -209,7 +228,7 @@ function progressHandler(event) {
 
 function quitSt(){
   setTimeout(function(){
-    _("item_uploaded").classList.remove("showItemUp");
+	_("item_uploaded").classList.remove("showItemUp");
   },5000);
 }
 
@@ -228,58 +247,58 @@ function abortHandler(event) {
 }
 
 function humanFileSize(bytes, si) {
-    var thresh = si ? 1000 : 1024;
-    if(Math.abs(bytes) < thresh) {
-        return bytes + ' B';
-    }
-    var units = si
-        ? ['kB','MB','GB','TB','PB','EB','ZB','YB']
-        : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
-    var u = -1;
-    do {
-        bytes /= thresh;
-        ++u;
-    } while(Math.abs(bytes) >= thresh && u < units.length - 1);
-    return bytes.toFixed(1)+' '+units[u];
+	var thresh = si ? 1000 : 1024;
+	if(Math.abs(bytes) < thresh) {
+		return bytes + ' B';
+	}
+	var units = si
+		? ['kB','MB','GB','TB','PB','EB','ZB','YB']
+		: ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+	var u = -1;
+	do {
+		bytes /= thresh;
+		++u;
+	} while(Math.abs(bytes) >= thresh && u < units.length - 1);
+	return bytes.toFixed(1)+' '+units[u];
 }
 
 function readURL(input) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      $('#tmposmara').attr('src', e.target.result);
-    }
-    reader.readAsDataURL(input);
+	var reader = new FileReader();
+	reader.onload = function(e) {
+	  $('#tmposmara').attr('src', e.target.result);
+	}
+	reader.readAsDataURL(input);
 }
 
 
 function ckd(ele){
-    var path = ele.getAttribute("data-url");
-    returnFileUrl(path);
+	var path = ele.getAttribute("data-url");
+	returnFileUrl(path);
 }
-        
-        function getUrlParam( paramName ) {
-            var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
-            var match = window.location.search.match( reParam );
+		
+		function getUrlParam( paramName ) {
+			var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
+			var match = window.location.search.match( reParam );
 
-            return ( match && match.length > 1 ) ? match[1] : null;
-        }
+			return ( match && match.length > 1 ) ? match[1] : null;
+		}
 
-        function returnFileUrl(url) {
-            var funcNum = getUrlParam('CKEditorFuncNum');
-            var fileUrl = url;
-            window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl, function(){
+		function returnFileUrl(url) {
+			var funcNum = getUrlParam('CKEditorFuncNum');
+			var fileUrl = url;
+			window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl, function(){
 
-                // Get the reference to a dialog window.
-                var dialog = this.getDialog();
-                // Check if this is the Image Properties dialog window.
-                if ( dialog.getName() == 'image' ) {
-                    // Get the reference to a text field that stores the "alt" attribute.
-                    var element = dialog.getContentElement( 'info', 'txtAlt' );
-                    // Assign the new value.
-                    if ( element )
-                        element.setValue( 'MasterInformatic Image' );
-                }
+				// Get the reference to a dialog window.
+				var dialog = this.getDialog();
+				// Check if this is the Image Properties dialog window.
+				if ( dialog.getName() == 'image' ) {
+					// Get the reference to a text field that stores the "alt" attribute.
+					var element = dialog.getContentElement( 'info', 'txtAlt' );
+					// Assign the new value.
+					if ( element )
+						element.setValue( 'MasterInformatic Image' );
+				}
 
-            });
-            window.close();
-        }
+			});
+			window.close();
+		}

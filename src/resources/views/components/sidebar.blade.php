@@ -6,7 +6,7 @@
               <li ondrop='drop(event)' ondragover='allowDrop(event)' data-path='".self::removeFullPath($i->path)."'>
                         <div class='mi-toggle'>
                             <span class='fldr'><i class='fa fa-folder'></i></span>
-                            <span class='text'><a href='?directory={{ config('mifilemanager.directory') }}'> {{ config('mifilemanager.directory') }} </a></span> 
+                            <span class='text'><a href='?directory={{ config('mifilemanager.directory') }}' class="side"> {{ config('mifilemanager.directory') }} </a></span> 
                              <span class='caretDown'><i class='fa fa-arrow-right'></i></span> 
                         </div>
                         <ul class='nested'>

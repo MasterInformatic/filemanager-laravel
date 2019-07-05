@@ -11,6 +11,7 @@ return [
     'mc-mdl-rn-in'         => 'Introduza el nuevo nombre',
     'mc-save'         	   => 'Guardar',
     'mc-cancel'            => 'Cancelar',
+    'mc-copy'              => 'Copiar',
 
     'msg-file-scs'         => 'Archivo subido exitosamente',
     'msg-file-d-scs'       => 'Archivo eliminado correctamente',

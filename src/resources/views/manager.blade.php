@@ -27,6 +27,8 @@
 
 @include('manager::components.modals.mkdir')
 
+
+
 <div class="container" id="asideContent" ondrop='drop(event)' ondragover='allowDrop(event)' >
 		
 			<div class="item_uploaded" id="item_uploaded">
@@ -48,7 +50,7 @@
 			@yield('manager::FileManager')
 	
 </div>
-
+@include('manager::components.modals.dirs')
 
 		<script src="{{ asset('FileManager/js/FileManager.js') }}"></script>
 		<script>
@@ -309,6 +311,11 @@
 
 		if(link.getAttribute("data-action")=="Select"){
 
+		}
+
+		if(link.getAttribute("data-action")=="Copy"){
+			$("#myModal").addClass("h");
+			$("#btnMkDir").attr("data-copy",name)
 		}
 
 		toggleMenuOff();

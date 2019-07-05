@@ -25,4 +25,5 @@ Route::group(['namespace' => 'MasterInformatic\filemanagerlaravel\Http\Controlle
 
 	Route::get('filemanager/get/{filename}','FileManagerController@getIm');
 
+
 }); 

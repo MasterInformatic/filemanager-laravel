@@ -1,18 +1,18 @@
 @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css);@import url(https://use.fontawesome.com/releases/v5.2.0/css/all.css);* {
   box-sizing: border-box;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+   -moz-user-select: none;
+    -ms-user-select: none;
+      user-select: none;
 }
 
 #asideContent {
   display: flex;
   flex-wrap: wrap;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+   -moz-user-select: none;
+    -ms-user-select: none;
+      user-select: none;
   margin-top: 100px;
   width: calc(100% - 251px);
   height: 100%;
@@ -23,9 +23,9 @@
   display: flex;
   flex-wrap: wrap;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+   -moz-user-select: none;
+    -ms-user-select: none;
+      user-select: none;
 }
 
 #asideContent .item {
@@ -368,70 +368,70 @@ section {
 }
 
 /*.t-subbody{
+  width: 100%;
+  background: #325499;
+  color:white;
+
+  ul.t-ul.entry-meta{
     width: 100%;
-    background: #325499;
-    color:white;
+    list-style: none;
+    cursor: pointer;
+    list-style: none;
 
-    ul.t-ul.entry-meta{
-        width: 100%;
-        list-style: none;
-        cursor: pointer;
-        list-style: none;
+    li.no-a{
+
+
+      ul.t-ul{
+
 
         li.no-a{
 
 
-            ul.t-ul{
-
-
-                li.no-a{
-
-
-                }
-            }
         }
+      }
+    }
+  }
+
+  ul.t-ul{
+    width: 100%;
+    list-style: none;
+    cursor: pointer;
+    padding: 0px;
+
+    li:not(.no-a):hover{
+      background: red;
     }
 
-    ul.t-ul{
-        width: 100%;
-        list-style: none;
-        cursor: pointer;
-        padding: 0px;
+    li.no-a{
+      width: 100%;
+      padding: 15px;
+      position: relative;
 
-        li:not(.no-a):hover{
-            background: red;
+
+
+
+      div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span.os{
+          i{
+
+          }
+          a{
+            color:white;
+            text-decoration: none;
+          }
         }
+        span.mara{
+          i{
 
-        li.no-a{
-            width: 100%;
-            padding: 15px;
-            position: relative;
-
-
-
-
-            div{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                span.os{
-                    i{
-
-                    }
-                    a{
-                        color:white;
-                        text-decoration: none;
-                    }
-                }
-                span.mara{
-                    i{
-
-                    }
-                }
-            }
+          }
         }
+      }
     }
+  }
 }*/
 
 div.main {
@@ -539,53 +539,53 @@ aside.shFiles::-webkit-scrollbar-thumb:hover {
 
 @media (max-width: 800px) {
   div.main div.elements button {
-    width: 35px;
-    background: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 35px;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   }
 
   div.main div.elements button span {
-    display: none;
+  display: none;
   }
 
   div.main div.elements button.btnMain {
-    display: block;
-    width: 35px;
-    height: 35px;
+  display: block;
+  width: 35px;
+  height: 35px;
   }
 
   div.main div.elements button:hover {
-    background: white;
+  background: white;
   }
 
   aside.shFiles {
-    width: 250px;
-    height: 100vh;
-    background: #f2f2f2;
-    position: fixed;
-    transition: 0.5s;
-    top: 50px;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    left: -250px;
-    z-index: 100;
-    overflow-y: scroll;
+  width: 250px;
+  height: 100vh;
+  background: #f2f2f2;
+  position: fixed;
+  transition: 0.5s;
+  top: 50px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  left: -250px;
+  z-index: 100;
+  overflow-y: scroll;
   }
 
   aside.shFiles.s {
-    left: 0px;
+  left: 0px;
   }
 
   #asideContent {
-    position: absolute;
-    left: 0px;
-    top: -50px;
-    transition: 0.5s;
+  position: absolute;
+  left: 0px;
+  top: -50px;
+  transition: 0.5s;
   }
 
   #asideContent.s {
-    left: 250px;
+  left: 250px;
   }
 }
 
@@ -743,4 +743,94 @@ img {
   color: white;
   background: transparent;
 }
+
+.mimodal{
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgba(0,0,0,0.4);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  overflow-y: hidden;
+}
+.mimodal.h{
+  display: flex;
+}
+
+.mimodal .mimodal-d{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mimodal .mimodal-d .mimodal-content{
+  width: 500px;
+  height: auto;
+  background: white;
+  padding: 5px;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+  border-radius: 2px;
+}
+.mimodal .mimodal-d .mimodal-content .mm-header{
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.mimodal .mimodal-d .mimodal-content .mm-header button{
+  width: 25px;
+  height: 25px;
+  border:none;
+  border-radius: 50px;
+  background: white;
+  color: red;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  outline: none;
+}
+
+.mimodal .mimodal-d .mimodal-content .mm-body{
+  padding: 5px;
+}
+
+.mimodal .mimodal-d .mimodal-content .mm-footer{
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 5px;
+}
+
+.mimodal .mimodal-d .mimodal-content .mm-footer button{
+  margin: 0px 5px;
+  background: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.mimodal .mimodal-d .mimodal-content .mm-footer button.save{
+  color: #128765;
+}
+.mimodal .mimodal-d .mimodal-content .mm-footer button.cancel{
+  color: #FF3515;
+}
+
+.mimodal .mimodal-d .mimodal-content .mm-footer button:hover{
+  background: rgba(0,0,0,0.1)
+}
+
+
+
+
+
+
+
+
+
 

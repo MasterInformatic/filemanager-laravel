@@ -5,7 +5,7 @@
             <i class="fa fa-bars"></i>
         </button>
 
-        {{-- <button class="btnTestOsmara ">
+        <button class="btnTestOsmara ">
 
             <form action="url('filemanager/upload')" enctype="">
                 <input type="file" id="upldFile" style="display: none;" onchange="uploadFile(this)" name="upload">
@@ -17,9 +17,9 @@
 
             </form>
 
-        </button> --}}
-
-        <button class="btnTestOsmara" id="btnMkDir" data-path="{{ config('mifilemanager.directory') }}">
+        </button>
+    
+        <button class="btnTestOsmara" id="btnMkDir" data-path="{{ config('mifilemanager.directory') }}" data-copy="">
             <i class="fa fa-folder"></i>
             <span >{{ trans('mifilemanager::mifm.new-folder') }}</span>
         </button>
