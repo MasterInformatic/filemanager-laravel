@@ -250,9 +250,15 @@ div.main div.elements div.i .view button {
   position: initial;
 }
 
+
+
 #asideContent #shwfiles.listView{
   width: 100%;
   display: flex;
+}
+
+#asideContent #shwfiles .item.file.da{
+  display: none;
 }
 
 #asideContent #shwfiles.listView .item.file{
