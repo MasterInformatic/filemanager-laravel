@@ -7,26 +7,12 @@
                         <div class='mi-toggle'>
                             <span class='fldr'><i class='fa fa-folder'></i></span>
                             <span class='text'><a href='?directory={{ config('mifilemanager.directory') }}' class="side"> {{ config('mifilemanager.directory') }} </a></span> 
-                             <span class='caretDown'><i class='fa fa-arrow-right'></i></span> 
+                             <span class='caretDown'><i class='fa fa-angle-right'></i></span> 
                         </div>
-                        <ul class='nested'>
+                        <ul class='nested active'>
                     {!! $menu !!}
             </ul>
         </div>
       
     </section>
 </aside>
-
- 
-
-<script>
-  $('.t-ul').find('li').click(function(e){
-    $('.t-ul').find('li').removeClass('active');
-    $(this).addClass('active');
-    e.stopPropagation();
-  })
-  $("li.no-a").click(function(e){
-      $(this).children("ul").collapse('toggle');
-      e.stopPropagation();
-  } );
-</script>

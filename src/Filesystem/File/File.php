@@ -19,16 +19,15 @@ class File extends UploadedFile{
 	public $thumb;
 	public $mime;
 
-	public function __construct($name,$type,$path,$size,$icon,$tname,$thumb,$mime=null){
-		$this->name=$name;
-		$this->type=$type;
-		$this->path=$path;
-		$this->size=$size;
-		$this->size=$size;
-		$this->icon=$icon;
-		$this->tname=$tname;
-		$this->thumb=$thumb;
-		$this->mime=$mime;
+	public function __construct($name,$type,$path,$size,$icon,$tname,$thumb,$mime = ''){
+		$this->name=$name;//image.jpg
+		$this->type=$type;//file/folder
+		$this->path=$path;//storage/image.jpg
+		$this->size=$size;//250kb
+		$this->icon=$icon;//fa fa-file-image
+		$this->tname=$tname;//archivo de imagen
+		$this->thumb=$thumb;//storage/thumbs/image.jpg
+		$this->mime=$mime;//image/jpg
 	}
 
 

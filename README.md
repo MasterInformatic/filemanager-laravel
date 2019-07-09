@@ -31,7 +31,7 @@
 - support videos upload
 - support view videos
 - play/pause gifs
-- support copy files
+- support copy/move/delete files
 
 ## Screenshots
 

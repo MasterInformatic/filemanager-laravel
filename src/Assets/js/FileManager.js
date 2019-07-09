@@ -11,7 +11,7 @@
   function initMi(){
 	getDataXhttp("?directory=/storage/");
   }
-
+ 
 })(jQuery);
 
 	var btnMkDir = $("#btnMkDir");
@@ -59,8 +59,6 @@
 	$("#shwfiles").text("");
   }
 
-
-
 	function testOsmaraqlera(el){
 	  var path = el.getAttribute("data-path");
 
@@ -68,6 +66,11 @@
 	  path_dir = "?directory=/"+path;
  
 	  getDataXhttp("?directory="+path);
+
+	    var ph_dir = path_dir.replace("?directory=","");
+		ph_dir = ph_dir.replace("\\","");
+		ph_dir = ph_dir.split("/").join(" > ");
+		$("#rootPath").text(ph_dir);
 	}
 
 
@@ -96,7 +99,7 @@
 				.parentElement
 				.parentElement
 				.style
-				.background = "#f2f2f2";
+				.background = "#fff";
 			}
 			el.parentElement
 				.parentElement
@@ -113,6 +116,13 @@
 		btnMkDir.attr("data-path",e.target.getAttribute("href"));
 		path_dir  = e.target.getAttribute("href");
 		chanbg(this);/*======*/
+
+		var ph_dir = path_dir.replace("?directory=","");
+		ph_dir = ph_dir.replace("\\","");
+		ph_dir = ph_dir.split("/").join(" > ");
+		$("#rootPath").text(ph_dir);
+
+
 	  });
 	  btnMkDir.click(function(){
 		modalRename.addClass("show");
@@ -127,26 +137,39 @@
 	  btnSave.click(function(){
 		sendMkDir();
 	  });
-
+  
 	  $("div.mi-toggle a.actions").click(function(e){
 		  e.preventDefault();
 		  $("#myModal").removeClass("h");
 
-		  console.log($(this).attr("href"))
-
+		  var ac = $("#btnMain").attr("data-action");
+		  var fn = $("#btnMain").attr("data-url");
 		  var p_to   = $(this).attr("href");
 		  var p_from = btnMkDir.attr("data-path");
-		  var filename = btnMkDir.attr("data-copy");
 
 		  var formdata = new FormData();
 		  var ajax = new XMLHttpRequest();
 
 		  formdata.append("p_to", p_to);
 		  formdata.append("p_from", p_from);
-		  formdata.append("filename", filename);
-		  ajax.open("POST", "/filemanager/copyfiles"); 
+		  formdata.append("filename", fn);
+
+		  ajax.addEventListener("load", function(event){
+			if(event.target.status==200){
+				if(ac=="move"){
+			  		var ele = document.getElementById(fn);
+			  		ele.parentNode.removeChild(ele);
+			  	}
+			}
+		  }, false);
+
+		  if(ac=="copy"){
+		 	 ajax.open("POST", "/filemanager/copyfiles"); 
+		  }else if(ac=="move"){
+		 	 ajax.open("POST", "/filemanager/movefiles"); 
+		  }
+
 		  ajax.send(formdata);
- 
 
 	  });
 	}

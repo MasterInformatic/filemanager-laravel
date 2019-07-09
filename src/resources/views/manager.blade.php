@@ -28,7 +28,6 @@
 @include('manager::components.modals.mkdir')
 
 
-
 <div class="container" id="asideContent" ondrop='drop(event)' ondragover='allowDrop(event)' >
 		
 			<div class="item_uploaded" id="item_uploaded">
@@ -46,7 +45,7 @@
 					</div>
 				</div>
 			</div>
-
+			<div id="status"></div>
 			@yield('manager::FileManager')
 	
 </div>
@@ -64,20 +63,28 @@
 		for (i = 0; i < toggler.length; i++) {
 			toggler[i].addEventListener("click", function() {
 
-						console.log(this);
+				this.parentElement
+					.querySelector(".fldr")
+					.querySelector(".fa.fa-folder")
+					.classList
+					.toggle("fa-folder-open");
 
 				this.parentElement
-						.parentElement
-						.querySelector(".nested")
-						.classList
-						.toggle("active");
+					.parentElement
+					.querySelector(".nested")
+					.classList
+					.toggle("active");
 
 				this.querySelector(".fa")
-						.classList
-						.toggle("rt");
+					.classList
+					.toggle("rt");
 
 			});
 		}
+		$("#changeView").click(function(){
+			$("#shwfiles").toggleClass("listView");
+			$(this).children().toggleClass("fa-th-list");
+		});
 		</script>
 
 
@@ -98,10 +105,8 @@
 				}
 			}
 		}
-
 		return false;
 	}
-
 
 	function getPosition(e) {
 		var posx = 0;
@@ -143,6 +148,10 @@
 	var menuItems = menu.querySelectorAll(".context-menu__item");
 	var itemAll = menu.querySelectorAll(".item");
 
+	var menu2 = document.querySelector("#context-menu-2");
+	var menuItems = menu2.querySelectorAll(".context-menu__item");
+	var itemAll = menu2.querySelectorAll(".item");
+
 	var menuItems2 = document.querySelectorAll(".btnTestOsmara");
 
 	var menuState = 0;
@@ -173,26 +182,46 @@
 		document.addEventListener( "contextmenu", function(e) {
 			taskItemInContext = clickInsideElement( e, taskItemClassName );
 
-			// console.log(taskItemInContext);
+			//si es archivo mostrar un meni
+			if(taskItemInContext.classList.contains("file")){
 
-			if ( taskItemInContext ) {
+				if ( taskItemInContext ) {
 
-				e.preventDefault();
-				toggleMenuOn();
-				positionMenu(e);
-			} else {
-				taskItemInContext = null;
-				toggleMenuOff();
+					e.preventDefault();
+					toggleMenuOn();
+					positionMenu(e);
+				} else {
+					taskItemInContext = null;
+					toggleMenuOff();
+				}
+			}else{//si es carpeta mostrar otro menu
+					taskItemInContext = null;
+					toggleMenuOff();
 			}
+
 		});
 	}
 
 
 	function clickListener() {
 		document.addEventListener( "click", function(e) {
+			
+			var elems = document.querySelectorAll(".item.select");
+			[].forEach.call(elems, function(el) {
+			    el.classList.remove("select");
+			});
+
+			var ql = clickInsideElement(e,"item");
+			if(ql){
+				var elemento = document.getElementById(ql.getAttribute("id"));
+				if(elemento){
+					elemento.classList.add("select");
+				}
+			}
+
+
 			var clickeElIsLink = clickInsideElement( e, contextMenuLinkClassName );
 			
-
 			if ( clickeElIsLink ) {
 				e.preventDefault();
 				menuItemListener( clickeElIsLink );
@@ -204,7 +233,7 @@
 			}
 		});
 	}
-
+	/*removeClass*/
 	function removeClass(els,className){
 		console.log(els.length);
 		for(var i=0;i < els.length; i++){
@@ -247,12 +276,10 @@
 
 	function positionMenu(e) {
 
-
 		clickCoords = getPosition(e);
 		clickCoordsX = clickCoords.x;
 		clickCoordsY = clickCoords.y;
 		
-
 		menuWidth = menu.offsetWidth + 4;
 		menuHeight = menu.offsetHeight + 4;
 
@@ -267,16 +294,14 @@
 			menu.style.left = clickCoordsX + "px";
 		}
 
-
 		if ( (windowHeight - clickCoordsY) < menuHeight ) {
-			// menu.style.top = windowHeight - menuHeight + "px";
 			menu.style.top = clickCoordsY + "px";
 		} else {
 			menu.style.top = clickCoordsY + "px";
 		}
 	}
 
-
+ 
 	function menuItemListener( link ) {
 
 		var url = taskItemInContext.getAttribute("data-url");
@@ -309,13 +334,23 @@
 			  	ajax.send(formdata);
 		}
 
-		if(link.getAttribute("data-action")=="Select"){
-
-		}
 
 		if(link.getAttribute("data-action")=="Copy"){
 			$("#myModal").addClass("h");
-			$("#btnMkDir").attr("data-copy",name)
+			$("#btnMkDir").attr("data-copy",name);
+
+			$("#btnMain").attr("data-action","copy");
+			$("#btnMain").attr("data-url",name);
+
+		}
+
+		if(link.getAttribute("data-action")=="Move"){
+			$("#myModal").addClass("h");
+			$("#btnMkDir").attr("data-copy",name);
+			$("#btnMain").attr("data-action","move");
+			$("#btnMain").attr("data-url",name);
+			
+			
 		}
 
 		toggleMenuOff();
@@ -334,10 +369,12 @@
 		var btnMain = document.getElementById('btnMain');
 		var shFiles = document.getElementById('shFiles');
 		var asideContent = document.getElementById('asideContent');
+		var root = document.getElementById('mainRoot');
 
 		btnMain.addEventListener('click',function(e){
 				shFiles.classList.toggle('s');
 				asideContent.classList.toggle('s');
+				root.classList.toggle('s');
 		});
 
 </script>

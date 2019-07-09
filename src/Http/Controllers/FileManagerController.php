@@ -72,20 +72,21 @@ class FileManagerController extends Controller{
         ];
         $mimeGif = ["image/gif"];
         $mimeVideo = ["video/mp4"];
-        $mimePDF = ["application/pdf"];
   
         if (in_array($i->mime, $mimeGif)){
-            return "<img src='".url('storage/thumbs/'.$i->name)."' width='250px' height='250px' draggable='false' data-gif='".url($i->path)."' class='gif'>";
+            return "<img src='".url('storage/thumbs/'.$i->name)."' width='100%' height='100%' draggable='false' data-gif='".url($i->path)."' class='gif'>";
         }else if(in_array($i->mime, $mimeImages)){
-            return "<img src='".url($i->path)."' alt='' width='250px' height='250px' draggable='false' />";
+            return "<img src='".url($i->path)."' alt='' width='100%' height='100%' draggable='false' />";
         }else if(in_array($i->mime, $mimeVideo)){
-            return "<video width='250px' height='250px'>
+            return "<video width='200px' height='200px'>
                       <source src='".url($i->path)."' type='video/mp4'>
                     </video>";
-        }else if(in_array($i->mime, $mimePDF)){
-            return "<iframe src='".url($i->path)."' width='100%' style='height:100%' frameborder='0' scrolling='no'>Dont support</iframe>";
         }else{
-            return "<img src='".url($i->icon)."' alt='' width='250px' height='250px' draggable='false' />";
+            
+            $ext = FacedeFile::extension($i->path);
+            $img = Config::get('mifilemanager.file_urls_array.'.$ext);
+
+            return "<img src='/".$img."' alt='' width='100%' height='100%' draggable='false' />";
         }
 
     }
@@ -93,44 +94,52 @@ class FileManagerController extends Controller{
     public function getfiles(){
 
         $items = '';
+        $items2 = '';
         foreach (ScanDir::scanFiles() as $i) {
 
             if($i->type=='folder'){
-
+                
                 if(Config::get('mifilemanager.folderConfig.showInView')){
-                    $items .= "<div class='item' data-path='".$i->path."' ondblclick='testOsmaraqlera(this)'>
+                    $items2 .= "<div class='item ".$i->type."' data-path='".$i->path."' ondblclick='testOsmaraqlera(this)'>
                         <div class='img'>
-                            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Folder_1_icon-72a7cf.svg/1024px-Folder_1_icon-72a7cf.svg.png' alt='' idth='250px' height='250px'>
+                            <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Folder_1_icon-72a7cf.svg/1024px-Folder_1_icon-72a7cf.svg.png' alt=''>
                         </div>
                         <div class='data'>
-                            <span>".$i->name."</span>
+                            <span>
+                                ".$i->name."
+                            </span>
+                            
                         </div>
                     </div>";
                 }
                  
-            }else{
+            }else{ 
                 
-                $items .= "<div class='item' data-url='".url($i->path)."' data-name='".$i->name."' data-id='".$i->name."' draggable='true' ondragstart='drag(event)' id='".$i->name."' ondblclick='ckd(this)'>
+                $items .= "<div class='item ".$i->type."' data-url='".url($i->path)."' data-name='".$i->name."' data-id='".$i->name."' draggable='true' ondragstart='drag(event)' id='".$i->name."' ondblclick='ckd(this)'>
                     <div class='img'>
                          ".$this->getPlayer($i)."
                     </div>
                     <div class='data'>
-                        <span>".$i->name."</span>
-                        <br>
-                        <span>".$i->size."</span>
-                    </div>
-                    <div class='select'>
-                        <div class='con'>
-                           <div class='triangle'></div>
-                            <img src='https://cdn2.iconfinder.com/data/icons/check-mark-style-1/1052/check_mark_voting_yes_no_20-512.png' alt=''>
-                        </div>
+                        <span>
+                            <div>
+                                <i class='".$i->icon."'></i> 
+                                <div class='span'>
+                                    <span>".$i->name."</span>
+                                </div>
+                            </div>
+                            <div class='size'>
+                                <span>
+                                    ".$i->size."
+                                </span>
+                            </div>
+                        </span>
                     </div>
                 </div>";
             }
 
         }
 
-        return $items;
+        return "<div class='item file da'><div class='data'><span><div><i class=''></i> <div class='span'><span>".trans('mifilemanager::mifm.mc-view-name')."</span></div></div><div class='size'><span>".trans('mifilemanager::mifm.mc-view-size')."</span></div></span></div></div>".$items."<div class='view_fldrs'>".$items2."</div>";
 
     }
  
@@ -169,17 +178,59 @@ class FileManagerController extends Controller{
             return response()->json([
                 "status" => "error",
                 "status_code" => 403,
-                "message" => "La ruta de destino y la de origen no pueden ser iguales"
+                "message" => trans('mifilemanager::mifm.error-mvcp-same')
+            ],403);
+        }
+        try {
+            FacedeFile::copy(public_path($from), public_path($to));
+            return response()->json([
+                "status" => "success",
+                "status_code" => 200,
+                "message" => trans('mifilemanager::mifm.msg-sccss-copy')
+            ],200);
+        } catch (Exception $e) {
+            return response()->json([
+                "status" => "error",
+                "status_code" => 500,
+                "message" => $e->getMessage()
+            ],500);
+        }
+    }
+ 
+    public function movefiles(Request $request){
+
+        $to = str_replace("?directory=\\", "", $request->p_to);
+        $to = str_replace("?directory=", "", $to);
+        $to = $to."/".$request->filename;
+
+        $from = str_replace("?directory=\\", "", $request->p_from);
+        $from = str_replace("?directory=", "", $from);
+        $from = $from."/".$request->filename;
+
+        if($from == $to){
+            return response()->json([
+                "status" => "error",
+                "status_code" => 403,
+                "message" => trans('mifilemanager::mifm.error-mvcp-same')
             ],403);
         }
 
-        FacedeFile::copy(public_path($from), public_path($to));
-        
-        return response()->json([
+        try {
+            FacedeFile::move(public_path($from), public_path($to));
+            return response()->json([
                 "status" => "success",
                 "status_code" => 200,
-                "message" => "Files copied"
-        ],200);
+                "message" => trans('mifilemanager::mifm.msg-sccss-move')
+            ],200);
+        } catch (Exception $e) {
+            return response()->json([
+                "status" => "error",
+                "status_code" => 500,
+                "message" => $e->getMessage()
+            ],500);
+        }
+        
+        
     }
 
     public function download(Request $request){

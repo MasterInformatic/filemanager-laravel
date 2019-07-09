@@ -12,6 +12,8 @@ return [
     'mc-save'         	   => 'Guardar',
     'mc-cancel'            => 'Cancelar',
     'mc-copy'              => 'Copiar',
+    'mc-move'              => 'Mover',
+
 
     'msg-file-scs'         => 'Archivo subido exitosamente',
     'msg-file-d-scs'       => 'Archivo eliminado correctamente',
@@ -26,6 +28,16 @@ return [
     'error-folder-nm'      => 'Nombre invalido',
     'error-folder-pd'      => 'Permiso denegado',
     'error-folder-mk'      => 'Ha ocurrido un problema al crear la carpeta.',
+
+    'mc-view-name'              => 'Nombre',
+    'mc-view-size'              => 'Tamaño',
+
+    'error-mvcp-same'      => 'La ruta de destino y de origen no pueden ser la misma',
+
+    'msg-sccss-copy'      => 'Archivo copiado exitosamente',
+    'msg-sccss-move'      => 'Archivo movido exitosamente'
+
+
 
 
 ]; 

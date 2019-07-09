@@ -2,7 +2,6 @@
 
 @section('manager::FileManager')
 
-<div id="status"></div>
-<div id="shwfiles"></div>
+<div id="shwfiles" class=""></div>
 
 @endsection

@@ -43,6 +43,7 @@ class ScanDir
                         static::humanizeSize(filesize($dir.'/'.$f)),//size
                         static::getIcon($extension),//icon
                         static::getFileType($extension),
+                        null,//type name
                         null//type name
                     );
                     // dd($files[0]);
@@ -60,7 +61,7 @@ class ScanDir
         if (array_key_exists($extension, $icon_array)){
             $icon = $icon_array[$extension];
         }else{
-            $icon = "fa-file";
+            $icon = "fa fa-file";
         }
         return $icon;
     }
@@ -79,17 +80,19 @@ class ScanDir
     }
 
 
-    static function scanFiles(){
+    static function scanFiles($dir = null){
 
+        if(empty($dir)){
+            if(isset($_GET["directory"])){
+                $dir = public_path($_GET["directory"]);
 
-        if(isset($_GET["directory"])){
-            $dir = public_path($_GET["directory"]);
-
-        }else{
-            $dir = config('mifilemanager.dir');
+            }else{
+                $dir = config('mifilemanager.dir');
+            }
         }
         
         $files = array();
+        $folders = array();
 
         if(file_exists($dir)){
         
@@ -104,8 +107,9 @@ class ScanDir
                     $extension = strtolower(FacedeFile::extension($f));
                     $mime = FacedeFile::mimeType($dir.'/'.$f);
 
-                    if(File::isImageFile(self::removeFullPath($dir).'/'.$f)){
 
+                    if(File::isImageFile(self::removeFullPath($dir).'/'.$f)){
+                        
                         //IMAGENES!!
                         //CONSTRUCCION DE LA IMAGEN
                         $files[] = new File(
@@ -121,47 +125,48 @@ class ScanDir
                         );
 
                     }else{
+
                         // OTROS ARCHIVOS!!
                         if(!Config::get('mifilemanager.filesConfig.showImagesOnly')){
 
-                            // ICONO DEL TIPO DE ARCHIVO!!!
-                            //CONFIGURAR ESTO A GUSTO, por le momento
-                            //se queda asi obligatoriamente
                             $icons_url = 
                             Config::get('mifilemanager.file_urls_array.'.$extension);
                             if(empty($icons_url)){
                                 $icons_url ="";
                             }
 
+                            if(static::getIcon($extension)=="fa-file"){
+                                $osmara = static::getIcon($extension);
+                            }else{
+                                $osmara = static::getIcon($extension);
+                            }
                             //CONSTRUCCION DEL ARCHIVO
                             $files[] = new File(
                                 $f,//name
                                 "file",//type
                                 self::removeFullPath($dir).'/'.$f,//path
                                 static::humanizeSize(filesize($dir.'/'.$f)),//size
-                                // static::getIcon($extension),//icon
-                                $icons_url,
+                                $osmara,//icon
                                 static::getFileType($extension),
                                 null,
-                                $mime//type name
+                                $mime
                             );
 
                         }
 
                     }
 
-                }else{
-                    //CONSTRUCCION DEL FOLDER
+                }else{ 
                     $files[] =  new Folder(
                         $f,
                         "folder",
                         self::removeFullPath($dir).'/'.$f,
-                        self::scanDos($dir.'/'.$f)
+                        self::scanFiles($dir.'/'.$f)
                     );
+
                 }
             }
         }
-
         return $files;
     }
 

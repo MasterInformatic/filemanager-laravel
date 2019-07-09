@@ -12,6 +12,7 @@ return [
 	'mc-save'         	   => 'Save',
     'mc-cancel'            => 'Cancel',
     'mc-copy'            => 'Copy',
+    'mc-move'            => 'Move',
 
     'msg-file-scs'         => 'File uploaded successfully',
     'msg-file-d-scs'       => 'File deleted successfully',
@@ -28,4 +29,12 @@ return [
     'error-folder-mk'      => 'A problem occurred has creating the folder',
 
      
+    'mc-view-name'              => 'Name',
+    'mc-view-size'              => 'Size',
+
+    'error-mvcp-same'      => 'The destination and origin route can not be the same'
+
+    'msg-sccss-copy'      => 'File successfully copied',
+    'msg-sccss-move'      => 'File successfully moved'
+
 ]; 

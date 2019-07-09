@@ -23,6 +23,7 @@ All changes to this project will be documented in this file.
 - thumbs files only gif,image,video
 - support copy files
 - added icons for files
+- support move files
 
 ### 1.9.0
 - bugs fixed
