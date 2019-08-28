@@ -26,7 +26,7 @@ config.filebrowserUploadUrl = 'http://yourdomian.com/filemanager/upload';
 config.filebrowserBrowseUrl = 'http://yourdomian.com/filemanager/browser';
 
 config.extraPlugins = 'uploadimage';
-config.uploadUrl = 'http://masterinformatic3.0.mi/filemanager/upload';
+config.uploadUrl = 'http://yourdomian.com/filemanager/upload';
 
 ```
 
